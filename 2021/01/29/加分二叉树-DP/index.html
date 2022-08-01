@@ -16,23 +16,21 @@
   <meta name="author" content="F Juny">
   <meta name="keywords" content="">
   
-    <meta name="description" content="2022.07.24  CY老师组织了2022暑假第三次周报，期间RK学长期望与实验室同学来充实友链页；我向学长表示可能会离开CSDN，计划租ECS来建站，之前的友链可能就要改掉了；同时向学长表示关于此计划还要咨询他很多问题，学长则表示：  于是从21:27搞到了00:25~ 并通过此文章所述办法爬下来了之前CSDN上面的文章，为迁移和备份做好了准备~  2022.07.25  对照着Hexo">
+    <meta name="description" content="题目来源：Acwing 479-加分二叉树&amp;NEFU OJ-353 加分二叉树 NEFU OJ题源为多组输入，代码为此oj ac代码  题目描述  设一个n个节点的二叉树tree的中序遍历为（1,2,3,…,n），其中数字1,2,3,…,n为节点编号。 每个节点都有一个分数（均为正整数），记第i个节点的分数为di，tree及它的每个子树都有一个加分，任一棵子树subtree（也包含tree">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How did I come from?">
-<meta property="og:url" content="http://example.com/2022/07/26/How%20did%20I%20come%20from/index.html">
+<meta property="og:title" content="加分二叉树-DP">
+<meta property="og:url" content="http://example.com/2021/01/29/%E5%8A%A0%E5%88%86%E4%BA%8C%E5%8F%89%E6%A0%91-DP/index.html">
 <meta property="og:site_name" content="Yu_Tang">
-<meta property="og:description" content="2022.07.24  CY老师组织了2022暑假第三次周报，期间RK学长期望与实验室同学来充实友链页；我向学长表示可能会离开CSDN，计划租ECS来建站，之前的友链可能就要改掉了；同时向学长表示关于此计划还要咨询他很多问题，学长则表示：  于是从21:27搞到了00:25~ 并通过此文章所述办法爬下来了之前CSDN上面的文章，为迁移和备份做好了准备~  2022.07.25  对照着Hexo">
+<meta property="og:description" content="题目来源：Acwing 479-加分二叉树&amp;NEFU OJ-353 加分二叉树 NEFU OJ题源为多组输入，代码为此oj ac代码  题目描述  设一个n个节点的二叉树tree的中序遍历为（1,2,3,…,n），其中数字1,2,3,…,n为节点编号。 每个节点都有一个分数（均为正整数），记第i个节点的分数为di，tree及它的每个子树都有一个加分，任一棵子树subtree（也包含tree">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/905d71a9510340d08494e293a1a81aa9.png">
-<meta property="article:published_time" content="2022-07-26T02:06:57.000Z">
-<meta property="article:modified_time" content="2022-07-28T10:21:06.927Z">
+<meta property="article:published_time" content="2021-01-29T13:54:35.000Z">
+<meta property="article:modified_time" content="2022-08-01T16:32:56.194Z">
 <meta property="article:author" content="Fu Junyuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/905d71a9510340d08494e293a1a81aa9.png">
   
   
   
-  <title>How did I come from? - Yu_Tang</title>
+  <title>加分二叉树-DP - Yu_Tang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="How did I come from?"></span>
+            <span id="subtitle" data-typed-text="加分二叉树-DP"></span>
           
         </div>
 
@@ -210,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-07-26 10:06" pubdate>
-          2022年7月26日 上午
+        <time datetime="2021-01-29 21:54" pubdate>
+          2021年1月29日 晚上
         </time>
       </span>
     
@@ -222,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          214 字
+          2k 字
         
       </span>
     
@@ -233,7 +231,7 @@
         
         
         
-          2 分钟
+          17 分钟
         
       </span>
     
@@ -271,22 +269,73 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">How did I come from?</h1>
+            <h1 style="display: none">加分二叉树-DP</h1>
             
             
               <div class="markdown-body">
                 
-                <blockquote>
-<p>2022.07.24</p>
-</blockquote>
-<p>CY老师组织了2022暑假第三次周报，期间RK学长期望与实验室同学来充实友链页；我向学长表示可能会离开CSDN，计划租ECS来建站，之前的友链可能就要改掉了；同时向学长表示关于此计划还要咨询他很多问题，学长则表示：</p>
-<p><img src="https://img-blog.csdnimg.cn/905d71a9510340d08494e293a1a81aa9.png" srcset="/img/loading.gif" lazyload alt="人和人的体质不能一概而论，学长显然高估了我的能力" /></p>
-<p>于是从21:27搞到了00:25~</p>
-<p>并通过<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33976344/article/details/123800804">此文章</a>所述办法爬下来了之前CSDN上面的文章，为迁移和备份做好了准备~</p>
+                <p>题目来源：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/description/481/">Acwing 479-加分二叉树</a>&amp;<a target="_blank" rel="noopener" href="http://acm.nefu.edu.cn/problemShow.php?problem_id=353">NEFU OJ-353 加分二叉树</a><br />
+NEFU OJ题源为多组输入，代码为此oj ac代码</p>
 <blockquote>
-<p>2022.07.25</p>
+<p>题目描述</p>
+<blockquote>
+<p>设一个n个节点的二叉树tree的中序遍历为（1,2,3,…,n），其中数字1,2,3,…,n为节点编号。<br />
+每个节点都有一个分数（均为正整数），记第i个节点的分数为di，tree及它的每个子树都有一个加分，任一棵子树subtree（也包含tree本身）的加分计算方法如下：     <br />
+subtree的左子树的加分 × subtree的右子树的加分 ＋ subtree的根的分数 <br />
+若某个子树为空，规定其加分为1。叶子的加分就是叶节点本身的分数，不考虑它的空子树。<br />
+试求一棵符合中序遍历为（1,2,3,…,n）且加分最高的二叉树tree。<br />
+要求输出： <br />
+（1）tree的最高加分 <br />
+（2）tree的前序遍历</p>
 </blockquote>
-<p>对照着<a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/">Hexo Fluid 配置指南</a>忙活了一晚上，博客终于初具人形~</p>
+</blockquote>
+<blockquote>
+<p>输入描述</p>
+<blockquote>
+<p>第1行：一个整数n，为节点个数（n&lt;30） 。<br />
+第2行：n个用空格隔开的整数，为每个节点的分数（0&lt;分数&lt;100）。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>输出描述</p>
+<blockquote>
+<p>第1行：一个整数，为最高加分（结果不会超过int范围）。     <br />
+第2行：n个用空格隔开的整数，为该树的前序遍历。如果存在多种方案，则输出字典序最小的方案。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>输入样例</p>
+<blockquote>
+<p>5<br />
+5 7 1 2 10</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>输出样例</p>
+<blockquote>
+<p>145<br />
+3 1 2 4 5</p>
+</blockquote>
+</blockquote>
+<h2 id="op"><a class="markdownIt-Anchor" href="#op"></a> OP</h2>
+<p>y总yyds</p>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p>首先明确分数计算方式，对于一般的树而言，分数=左树*右树+根分数<br />
+如果左树或右树为空，且不均为空，则空树分数视为1；<br />
+若左右数均空，则空树分数均视为0，此时分数则仅为根分数。</p>
+<p>这道题采用从叶子向根的DP过程，建立 d[ i ][ j ] 表示 [ i , j ] 区间内所有元素构成分数最大的数的分数值。限定该区间的长度，在 [ 1 , n ] 区间从短到长进行DP。</p>
+<p>具体的DP过程：<br />
+在区间长度为len，左端点 i ，右端点 j = i + len - 1 时，以 k 为区间树的根，d[ i ] [ j ] = max( d[ i ][ k - 1 ] * d[ k + 1 ][ j ] + a[ k ] )。</p>
+<p>接下来进行特判：<br />
+如果len==1，即 i == j 时，左右子树均为空，d[ i ][ j ] = a[ i ]；<br />
+如果 k == i，即仅左子树为空，左子树分值为 1；<br />
+如果 k == j，仅右子树为空同理。</p>
+<p>接下来处理输出要求：<br />
+因为要求是前序遍历，故遍历 k 时从左到右即可满足条件，即所有可行解中最小 k。并记录区间树的根节点，输出时按根节点分为两树分别递归即可。</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> a[<span class="hljs-number">30</span>],f[<span class="hljs-number">30</span>][<span class="hljs-number">30</span>],d[<span class="hljs-number">30</span>][<span class="hljs-number">30</span>]= &#123;<span class="hljs-number">0</span>&#125;,n,i,j,k,len;<br><span class="hljs-comment">//a存储节点分数，f存储[i,j]区间树最大分数值，d存储[i,j]区间树最大分数值时的序号最小根（输出用）</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span><span class="hljs-comment">//递归输出</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (l &gt; r) <span class="hljs-keyword">return</span>;<span class="hljs-comment">//结束条件不是i==j</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; %d&quot;</span>,f[l][r]);<br>    <span class="hljs-built_in">dfs</span>(l, f[l][r] - <span class="hljs-number">1</span>), <span class="hljs-built_in">dfs</span>(f[l][r] + <span class="hljs-number">1</span>, r);<span class="hljs-comment">//以区间树的根节点为界分成两个区间</span><br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">while</span>(cin&gt;&gt;n)<br>    &#123;<br>        <span class="hljs-built_in">memset</span>(d,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span> d);<br>        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>; i&lt;=n; i++)<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;a[i]);<br>        <span class="hljs-keyword">for</span>(len=<span class="hljs-number">1</span>; len&lt;=n; len++)<span class="hljs-comment">//遍历合法区间长</span><br>            <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>; i&lt;=n-len+<span class="hljs-number">1</span>; i++)<span class="hljs-comment">//遍历合法左端点</span><br>            &#123;<br>                j=i+len<span class="hljs-number">-1</span>;<span class="hljs-comment">//计算对应区间长和左端点的右端点</span><br>                <span class="hljs-keyword">if</span>(len==<span class="hljs-number">1</span>)f[i][j]=i,d[i][j]=a[i];<span class="hljs-comment">//特判叶子</span><br>                <span class="hljs-keyword">else</span><br>                &#123;<br>                    <span class="hljs-keyword">for</span>(k=i; k&lt;=j; k++)<span class="hljs-comment">//遍历合法根</span><br>                    &#123;<br>                        <span class="hljs-type">int</span> lef=(k==i)?<span class="hljs-number">1</span>:d[i][k<span class="hljs-number">-1</span>];<span class="hljs-comment">//定义左子树分数</span><br>                        <span class="hljs-type">int</span> rig=(k==j)?<span class="hljs-number">1</span>:d[k+<span class="hljs-number">1</span>][j];<span class="hljs-comment">//定义右子树分数</span><br>                        <span class="hljs-type">int</span> ans=a[k]+lef*rig;<span class="hljs-comment">//计算以k为根的区间树分数</span><br>                        <span class="hljs-keyword">if</span>(ans&gt;d[i][j])d[i][j]=ans,f[i][j]=k;<span class="hljs-comment">//与历史值比较（如果是&gt;=，就不是字典序最小答案了）</span><br>                    &#125;<br>                &#125;<br>            &#125;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,d[<span class="hljs-number">1</span>][n]);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,f[<span class="hljs-number">1</span>][n]);<span class="hljs-comment">//此行及下行如果不担心PE的话可以直接用dfs(1,n)代替</span><br>        <span class="hljs-built_in">dfs</span>(<span class="hljs-number">1</span>,f[<span class="hljs-number">1</span>][n] - <span class="hljs-number">1</span>),<span class="hljs-built_in">dfs</span>(f[<span class="hljs-number">1</span>][n] + <span class="hljs-number">1</span>, n);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="ed"><a class="markdownIt-Anchor" href="#ed"></a> ED</h2>
+<p>\</p>
 
                 
               </div>
@@ -294,6 +343,34 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" class="category-chain-item">算法竞赛</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/DP%E4%B8%8E%E8%B4%AA%E5%BF%83/" class="category-chain-item">DP与贪心</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -304,8 +381,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>How did I come from?</div>
-      <div>http://example.com/2022/07/26/How did I come from/</div>
+      <div>加分二叉树-DP</div>
+      <div>http://example.com/2021/01/29/加分二叉树-DP/</div>
     </div>
     <div class="license-meta">
       
@@ -317,7 +394,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年7月26日</div>
+          <div>2021年1月29日</div>
         </div>
       
       
@@ -347,12 +424,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2021/01/31/%E7%AC%AC%E5%85%AB%E5%B1%8A%E2%80%9C%E5%9B%BE%E7%81%B5%E6%9D%AF%E2%80%9DNEUQ-ACM%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B8%AA%E4%BA%BA%E8%B5%9B%20%E5%85%A8%E9%A2%98%E8%A7%A3/" title="第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/31/%E7%AC%AC%E5%85%AB%E5%B1%8A%E2%80%9C%E5%9B%BE%E7%81%B5%E6%9D%AF%E2%80%9DNEUQ-ACM%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B8%AA%E4%BA%BA%E8%B5%9B%20%E5%85%A8%E9%A2%98%E8%A7%A3/" title="第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解">
-                        <span class="hidden-mobile">第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解</span>
+                      <a href="/2021/01/27/%E5%85%B3%E4%BA%8E%20%E7%A1%AC%E5%B8%81%E8%B4%AD%E7%89%A9%20%E4%B8%80%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF+%E9%9A%BE%E7%82%B9%E5%88%86%E6%9E%90+%E4%BB%A3%E7%A0%81%20%EF%BC%88DP%20+%20%E5%AE%B9%E6%96%A5%EF%BC%89/" title="关于 硬币购物 一题的思路+难点分析+代码 （DP + 容斥）">
+                        <span class="hidden-mobile">关于 硬币购物 一题的思路+难点分析+代码 （DP + 容斥）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,23 +16,23 @@
   <meta name="author" content="F Juny">
   <meta name="keywords" content="">
   
-    <meta name="description" content="2022.07.24  CY老师组织了2022暑假第三次周报，期间RK学长期望与实验室同学来充实友链页；我向学长表示可能会离开CSDN，计划租ECS来建站，之前的友链可能就要改掉了；同时向学长表示关于此计划还要咨询他很多问题，学长则表示：  于是从21:27搞到了00:25~ 并通过此文章所述办法爬下来了之前CSDN上面的文章，为迁移和备份做好了准备~  2022.07.25  对照着Hexo">
+    <meta name="description" content="OP 大体思路 AC代码 ED   题目来源：2020年浙大城市学院新生程序设计竞赛（同步赛）-H Bsq AK ZUCCPC   题目描述  新生赛开赛在即，Kwords打算预测每道题的过题人数，现在他想知道如果按照他预测的过题数据，会有多少人能够AK（全部通过）或爆零（无法通过任何一道题）呢。因为Kwords并不知道榜单实际的过题情况，所以希望你能帮助他预测AK和爆零的人数区间。  输入描述">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How did I come from?">
-<meta property="og:url" content="http://example.com/2022/07/26/How%20did%20I%20come%20from/index.html">
+<meta property="og:title" content="关于	Bsq AK ZUCCPC的思路+代码">
+<meta property="og:url" content="http://example.com/2020/12/27/%E5%85%B3%E4%BA%8E_Bsq%20AK%20ZUCCPC%E7%9A%84%E6%80%9D%E8%B7%AF+%E4%BB%A3%E7%A0%81/index.html">
 <meta property="og:site_name" content="Yu_Tang">
-<meta property="og:description" content="2022.07.24  CY老师组织了2022暑假第三次周报，期间RK学长期望与实验室同学来充实友链页；我向学长表示可能会离开CSDN，计划租ECS来建站，之前的友链可能就要改掉了；同时向学长表示关于此计划还要咨询他很多问题，学长则表示：  于是从21:27搞到了00:25~ 并通过此文章所述办法爬下来了之前CSDN上面的文章，为迁移和备份做好了准备~  2022.07.25  对照着Hexo">
+<meta property="og:description" content="OP 大体思路 AC代码 ED   题目来源：2020年浙大城市学院新生程序设计竞赛（同步赛）-H Bsq AK ZUCCPC   题目描述  新生赛开赛在即，Kwords打算预测每道题的过题人数，现在他想知道如果按照他预测的过题数据，会有多少人能够AK（全部通过）或爆零（无法通过任何一道题）呢。因为Kwords并不知道榜单实际的过题情况，所以希望你能帮助他预测AK和爆零的人数区间。  输入描述">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/905d71a9510340d08494e293a1a81aa9.png">
-<meta property="article:published_time" content="2022-07-26T02:06:57.000Z">
-<meta property="article:modified_time" content="2022-07-28T10:21:06.927Z">
+<meta property="og:image" content="https://s2.loli.net/2022/08/02/B4NOspYCz9G3rWF.png">
+<meta property="article:published_time" content="2020-12-27T11:30:17.000Z">
+<meta property="article:modified_time" content="2022-08-01T16:03:55.954Z">
 <meta property="article:author" content="Fu Junyuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/905d71a9510340d08494e293a1a81aa9.png">
+<meta name="twitter:image" content="https://s2.loli.net/2022/08/02/B4NOspYCz9G3rWF.png">
   
   
   
-  <title>How did I come from? - Yu_Tang</title>
+  <title>关于	Bsq AK ZUCCPC的思路+代码 - Yu_Tang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="How did I come from?"></span>
+            <span id="subtitle" data-typed-text="关于	Bsq AK ZUCCPC的思路+代码"></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-07-26 10:06" pubdate>
-          2022年7月26日 上午
+        <time datetime="2020-12-27 19:30" pubdate>
+          2020年12月27日 晚上
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          214 字
+          1.2k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          2 分钟
+          10 分钟
         
       </span>
     
@@ -271,22 +271,50 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">How did I come from?</h1>
+            <h1 style="display: none">关于	Bsq AK ZUCCPC的思路+代码</h1>
             
             
               <div class="markdown-body">
                 
-                <blockquote>
-<p>2022.07.24</p>
-</blockquote>
-<p>CY老师组织了2022暑假第三次周报，期间RK学长期望与实验室同学来充实友链页；我向学长表示可能会离开CSDN，计划租ECS来建站，之前的友链可能就要改掉了；同时向学长表示关于此计划还要咨询他很多问题，学长则表示：</p>
-<p><img src="https://img-blog.csdnimg.cn/905d71a9510340d08494e293a1a81aa9.png" srcset="/img/loading.gif" lazyload alt="人和人的体质不能一概而论，学长显然高估了我的能力" /></p>
-<p>于是从21:27搞到了00:25~</p>
-<p>并通过<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33976344/article/details/123800804">此文章</a>所述办法爬下来了之前CSDN上面的文章，为迁移和备份做好了准备~</p>
+                <p><ul class="markdownIt-TOC">
+<li><a href="#op">OP</a></li>
+<li><a href="#%E5%A4%A7%E4%BD%93%E6%80%9D%E8%B7%AF">大体思路</a></li>
+<li><a href="#ac%E4%BB%A3%E7%A0%81">AC代码</a></li>
+<li><a href="#ed">ED</a></li>
+</ul>
+<br />
+题目来源：<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/9934#question">2020年浙大城市学院新生程序设计竞赛（同步赛）-H Bsq AK ZUCCPC</a></p>
 <blockquote>
-<p>2022.07.25</p>
+<blockquote>
+<p>题目描述</p>
 </blockquote>
-<p>对照着<a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/">Hexo Fluid 配置指南</a>忙活了一晚上，博客终于初具人形~</p>
+<p>新生赛开赛在即，Kwords打算预测每道题的过题人数，现在他想知道如果按照他预测的过题数据，会有多少人能够AK（全部通过）或爆零（无法通过任何一道题）呢。因为Kwords并不知道榜单实际的过题情况，所以希望你能帮助他预测AK和爆零的人数区间。</p>
+<blockquote>
+<p>输入描述</p>
+</blockquote>
+<p>第一行给出一个正整数T(1≤T≤10)，表示接下来会给出T组测试数据。<br />
+对于每组测试数据，第一行给出两个正整数N(1≤N≤10<sup>5</sup>)表示新生赛有多少个题目，M(1≤M≤10<sup>9</sup> )表示参赛人数。<br />
+第二行给出N个数字，第i个数字表示第i道题通过的人数a<sub>i</sub> (0≤a<sub>i</sub>≤M)。</p>
+<blockquote>
+<p>输出描述</p>
+</blockquote>
+<p>对于每组数据，第一行给出两个数字L<sub>1</sub>,R<sub>1</sub>,表示AK的人数在区间[L<sub>1</sub>,R<sub>1</sub>]内，第二行给出两个数字L<sub>2</sub>,R<sub>2</sub>，表示爆零的人数在区间[L<sub>2</sub>,R<sub>2</sub>]内。</p>
+</blockquote>
+<h2 id="op"><a class="markdownIt-Anchor" href="#op"></a> OP</h2>
+<p>感谢<a target="_blank" rel="noopener" href="https://blog.csdn.net/RealKing_sblog">rk学长</a>与<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39354847">sl学长</a>的倾情指导。<br />
+.</p>
+<h2 id="大体思路"><a class="markdownIt-Anchor" href="#大体思路"></a> 大体思路</h2>
+<p>对于每道题，有a<sub>i</sub>人A掉，有M-a<sub>i</sub>人未A。则对于所有N道题，设A了P=a<sub>1</sub>+a<sub>2</sub>+…+a<sub>n</sub>人次，未A Q=M-a<sub>1</sub>+M-a<sub>2</sub>+…+M-a<sub>n</sub>人次。<br />
+对于AK左限，我们可以假设所有未A是尽可能由不同人完成的，即L<sub>1</sub>=MAX{M-Q , 0};对于AK右限，我们可以假设A掉AC数最少题的人也A掉了其他所以题，即L<sub>2</sub>=MIN{a<sub>i</sub>}；对于爆零左右限同理，L<sub>1</sub>=MIN{M-P , 0}，L<sub>2</sub>=M-MAX{a<sub>I</sub>} 。</p>
+<p>两个右限可如下例直观解释，N=6，M=20：<br />
+<img src="https://s2.loli.net/2022/08/02/B4NOspYCz9G3rWF.png" srcset="/img/loading.gif" lazyload alt="触摸板写字真费劲" /><br />
+.</p>
+<h2 id="ac代码"><a class="markdownIt-Anchor" href="#ac代码"></a> AC代码</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs javascript">#include &lt;bits/stdc++.<span class="hljs-property">h</span>&gt;<br>typedef long long ll;<br>using namespace std;<br>int <span class="hljs-title function_">main</span>(<span class="hljs-params"></span>)<br>&#123;<br>    ll t,m,n,i;<br>    <span class="hljs-title function_">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>,&amp;t);<br>    <span class="hljs-keyword">while</span>(t--)<br>    &#123;<br>        <span class="hljs-title function_">scanf</span>(<span class="hljs-string">&quot;%lld%lld&quot;</span>,&amp;n,&amp;m);<br>        ll a[<span class="hljs-number">100005</span>],mi=<span class="hljs-number">1000000000</span>,suf=<span class="hljs-number">0</span>,ma=<span class="hljs-number">0</span>,sum=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>; i&lt;=n; i++)<br>        &#123;<br>            <span class="hljs-title function_">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>,&amp;a[i]);<br>            <span class="hljs-keyword">if</span>(a[i]&lt;mi)mi=a[i];<br>            <span class="hljs-keyword">if</span>(a[i]&gt;ma)ma=a[i];<br>            sum+=a[i];<br>            suf+=m-a[i];<br>        &#125;<br>        <span class="hljs-title function_">printf</span>(<span class="hljs-string">&quot;%lld %lld\n%lld %lld\n&quot;</span>,<br>        	((suf&gt;m)?<span class="hljs-number">0</span>:m-suf),mi,((sum&gt;m)?<span class="hljs-number">0</span>:m-sum),m-ma);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="ed"><a class="markdownIt-Anchor" href="#ed"></a> ED</h2>
+<p>这套题真的太草了（双语）；<br />
+&amp;我被吊锤；<br />
+&amp;但我还是喜欢。</p>
 
                 
               </div>
@@ -294,6 +322,34 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" class="category-chain-item">算法竞赛</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/%E6%9C%AA%E5%88%86%E7%B1%BB/" class="category-chain-item">未分类</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -304,8 +360,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>How did I come from?</div>
-      <div>http://example.com/2022/07/26/How did I come from/</div>
+      <div>关于	Bsq AK ZUCCPC的思路+代码</div>
+      <div>http://example.com/2020/12/27/关于_Bsq AK ZUCCPC的思路+代码/</div>
     </div>
     <div class="license-meta">
       
@@ -317,7 +373,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年7月26日</div>
+          <div>2020年12月27日</div>
         </div>
       
       
@@ -347,12 +403,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2021/01/02/%E5%85%B3%E4%BA%8E%20%E7%81%AB%E8%BD%A6%E7%BC%96%E7%BB%84%E7%9A%84%E6%80%9D%E8%B7%AF+%E4%BB%A3%E7%A0%81/" title="关于	火车编组的思路+代码">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">关于	火车编组的思路+代码</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/31/%E7%AC%AC%E5%85%AB%E5%B1%8A%E2%80%9C%E5%9B%BE%E7%81%B5%E6%9D%AF%E2%80%9DNEUQ-ACM%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B8%AA%E4%BA%BA%E8%B5%9B%20%E5%85%A8%E9%A2%98%E8%A7%A3/" title="第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解">
-                        <span class="hidden-mobile">第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解</span>
+                      <a href="/2020/12/27/%E5%85%B3%E4%BA%8EGPA%20Involution%E7%9A%84%E6%80%9D%E8%B7%AF+%E8%A7%A3%E6%B3%95+%E4%BB%A3%E7%A0%81/" title="关于GPA Involution的思路+解法+代码">
+                        <span class="hidden-mobile">关于GPA Involution的思路+解法+代码</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

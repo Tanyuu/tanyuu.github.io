@@ -1,0 +1,693 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/assets/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="rgb(45,86,141)">
+  <meta name="author" content="F Juny">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="比赛链接：这里   OP 好多大佬哦~  A 切蛋糕 这道题是特判题（SpecialJudge），第一眼没看见，读完题就决定放了。 由于宽松的步数限制，可以暴力做，即先通过2047次切割把蛋糕切为2048份，即可保证分配时误差值小于 1 &#x2F; 1024。再找出可行的 c 满足 fabs( c &#x2F; 2048 - 1 &#x2F; k ) &lt;&#x3D; 1 &#x2F; 1024，即为给每份包装进 c 个 1 &#x2F; 211。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解">
+<meta property="og:url" content="http://example.com/2021/01/31/%E7%AC%AC%E5%85%AB%E5%B1%8A%E2%80%9C%E5%9B%BE%E7%81%B5%E6%9D%AF%E2%80%9DNEUQ-ACM%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B8%AA%E4%BA%BA%E8%B5%9B%20%E5%85%A8%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Yu_Tang">
+<meta property="og:description" content="比赛链接：这里   OP 好多大佬哦~  A 切蛋糕 这道题是特判题（SpecialJudge），第一眼没看见，读完题就决定放了。 由于宽松的步数限制，可以暴力做，即先通过2047次切割把蛋糕切为2048份，即可保证分配时误差值小于 1 &#x2F; 1024。再找出可行的 c 满足 fabs( c &#x2F; 2048 - 1 &#x2F; k ) &lt;&#x3D; 1 &#x2F; 1024，即为给每份包装进 c 个 1 &#x2F; 211。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-30T16:29:40.000Z">
+<meta property="article:modified_time" content="2022-08-01T16:34:50.905Z">
+<meta property="article:author" content="Fu Junyuan">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解 - Yu_Tang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>煜·塘</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/img/wide_home.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-01-31 00:29" pubdate>
+          2021年1月31日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          77 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>比赛链接：<a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/11746#question">这里</a><br />
+</p>
+<h1 id="op"><a class="markdownIt-Anchor" href="#op"></a> OP</h1>
+<p>好多大佬哦~</p>
+<h1 id="a-切蛋糕"><a class="markdownIt-Anchor" href="#a-切蛋糕"></a> A 切蛋糕</h1>
+<p>这道题是特判题（SpecialJudge），第一眼没看见，读完题就决定放了。</p>
+<p>由于宽松的步数限制，可以暴力做，即先通过2047次切割把蛋糕切为2048份，即可保证分配时误差值小于 1 / 1024。再找出可行的 c 满足 fabs( c / 2048 - 1 / k ) &lt;= 1 / 1024，即为给每份包装进 c 个 1 / 2<sup>11</sup>。</p>
+<p>注：经测试，蛋糕可以有剩余。</p>
+<p>//标准做法以后再补（flag）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span><br> <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> k,two=<span class="hljs-number">1</span>,i,j;<br>    cin&gt;&gt;k;<br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>; i&lt;=<span class="hljs-number">2048</span>; i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">fabs</span>((<span class="hljs-type">double</span>)i/<span class="hljs-number">2048.0</span><span class="hljs-number">-1.0</span>/k)&lt;=<span class="hljs-number">1.0</span>/<span class="hljs-number">1024</span>)<span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> c=i;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,<span class="hljs-number">2047</span>+k);<span class="hljs-comment">//输出总步数</span><br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>; i&lt;=<span class="hljs-number">10</span>; i++)<br>    &#123;<br>        <span class="hljs-keyword">for</span>(j=<span class="hljs-number">1</span>; j&lt;=two; j++)<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;1 %d\n&quot;</span>,i,cou++);<br>        two*=<span class="hljs-number">2</span>;<br>    &#125;<br>    <span class="hljs-keyword">for</span>(j=<span class="hljs-number">1</span>; j&lt;=k; j++)<br>    &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;2 %d&quot;</span>,c);<br>        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>; i&lt;=c; i++)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; 11&quot;</span>);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="b-小宝的幸运数组"><a class="markdownIt-Anchor" href="#b-小宝的幸运数组"></a> B 小宝的幸运数组</h1>
+<p>用 a[ i ] 表示从第一项加到第 i 项的和，则区间 [ i , j ] 的和为 a[ j ] - a[ i - 1 ] 。</p>
+<p>若区间 [ i , j ] 的和满足能被 k 整除，则有 ( a[ j ] - a[ i - 1 ] ) % k ==0，<br />
+即 a[ j ] % k == a[ i - 1 ] % k，<br />
+所以此问题等价为找出 a[ i ] % k 相等的最远距离。<br />
+O( k n<sup>2</sup> )遍历显然不现实，我们可以对 [ 0 , k - 1 ] 的每一个数存下最前位置和最后位置，再遍历 [ 0 , k - 1 ] 找出左右距离最远的。</p>
+<p><em>求余对四则运算封闭</em></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 100005</span><br> <br>ll a[N];<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> t;<br>    cin&gt;&gt;t;<br>    <span class="hljs-keyword">while</span>(t--)<br>    &#123;<br>        <span class="hljs-type">int</span> b[<span class="hljs-number">100005</span>]=&#123;<span class="hljs-number">0</span>&#125;,l[<span class="hljs-number">100005</span>]=&#123;<span class="hljs-number">0</span>&#125;,r[<span class="hljs-number">100005</span>]=&#123;<span class="hljs-number">0</span>&#125;;<span class="hljs-comment">//b计数，l,r存左右位置</span><br>        <span class="hljs-type">int</span> n,k,i,g,a=<span class="hljs-number">0</span>,m=<span class="hljs-number">0</span>;<br>        cin&gt;&gt;n&gt;&gt;k;<br>        b[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;l[<span class="hljs-number">0</span>]=<span class="hljs-number">0</span>;<span class="hljs-comment">//数组无元素时</span><br>        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)<br>        &#123;<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;g);<br>            a+=g;<br>            a%=k;<br>            <span class="hljs-keyword">if</span>(!b[a])&#123;l[a]=i;b[a]++;&#125;<br>            <span class="hljs-keyword">else</span>&#123;r[a]=i;b[a]++;&#125;<br>        &#125;<br>        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;k;i++)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(b[i]&gt;=<span class="hljs-number">2</span>&amp;&amp;r[i]-l[i]&gt;m)<span class="hljs-comment">//有左有右</span><br>            m=r[i]-l[i];<br>        &#125;<br>        <span class="hljs-keyword">if</span>(m)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,m);<br>        <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;-1\n&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="c-上进的凡凡"><a class="markdownIt-Anchor" href="#c-上进的凡凡"></a> C 	上进的凡凡</h1>
+<p>首先依题意，每个数构成的长度为一的数组均为nice的。</p>
+<p>若某数大于等于前数，则标注成1，否则标记为0，统计每段连续1的长度，对于长度为 n 的连续1，代表了一段长度为 n + 1 的非降数组，此数组中长度大于等于二的子数组有 n * ( n - 1 ) / 2 个。</p>
+<p>累加每一段非降数组的子数组个数，再加上总共的元素个数，即为结果。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span> </span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br> <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a[<span class="hljs-number">100005</span>]=&#123;<span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-type">int</span> n,i,j,c;<br>    <span class="hljs-type">long</span> <span class="hljs-type">long</span> ans=<span class="hljs-number">0</span>;<br>    cin&gt;&gt;n;<br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;a[i]);<br>    <span class="hljs-keyword">for</span>(i=n;i&gt;=<span class="hljs-number">2</span>;i--)<span class="hljs-keyword">if</span>(a[i]&gt;=a[i<span class="hljs-number">-1</span>])a[i]=<span class="hljs-number">1</span>;<span class="hljs-keyword">else</span> a[i]=<span class="hljs-number">0</span>;<span class="hljs-comment">//标注</span><br>    a[<span class="hljs-number">1</span>]=<span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> l,r;<br>    l=<span class="hljs-number">1</span>,r=<span class="hljs-number">1</span>;<br>    ans=n;<span class="hljs-comment">//单元素数组</span><br>    <span class="hljs-keyword">while</span>(l!=n)<br>    &#123;<br>        <span class="hljs-comment">//printf(&quot;%lld %d\n&quot;,ans,r);</span><br>        <span class="hljs-keyword">while</span>((!a[l+<span class="hljs-number">1</span>])&amp;&amp;l&lt;=n)l++;<span class="hljs-comment">//类似于滑窗</span><br>        r=l+<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span>(a[r+<span class="hljs-number">1</span>]&amp;&amp;r&lt;=n)r++;<br>        <span class="hljs-keyword">if</span>(l&lt;=n&amp;&amp;r&lt;=n)&#123;<br>        <span class="hljs-type">int</span> len=r-l+<span class="hljs-number">1</span>;<br>        ans+=(<span class="hljs-type">long</span> <span class="hljs-type">long</span>)len*(len<span class="hljs-number">-1</span>)/<span class="hljs-number">2</span>;<br>        l=r+<span class="hljs-number">1</span>;&#125;<br>        <span class="hljs-keyword">if</span>(l&gt;n)l=n;<span class="hljs-comment">//防溢出</span><br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld&quot;</span>,ans);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="d-seek-the-joker-i"><a class="markdownIt-Anchor" href="#d-seek-the-joker-i"></a> D Seek the Joker I</h1>
+<p>巴什博弈</p>
+<p>也可以现推：<br />
+<em>先手者抽牌+后手者抽牌 为一轮</em></p>
+<p>若保证先手者必赢，则最后一轮开始时需满足桌面有 1 &lt; n &lt;= k + 1 张牌，先手者取 n - 1 张，后手者必输；<br />
+则倒数第二轮开始时，需满足桌面有 k + 2 &lt; n &lt;= 2 * k + 2 张牌，先手者取至剩 k + 2 张，无论后手者如何取，均可满足先手者必赢的最后一轮条件；<br />
+同理，倒数第三轮开始时，需满足桌面有 2 * k + 3 &lt; n &lt;= 3 * k + 3 张牌，先手者取至剩  2 * k + 3 张，无论后手者如何取，均可满足先手者必赢的最后一轮条件；</p>
+<p>以此类推，若 n 满足存在正整数 a 使得 ( a - 1 ) * k + a &lt; n &lt;= a * k + a ，则先手者必赢，化简后则等价为 ⌈ n / ( k + 1 ) ⌉ * ( k + 1 ) - k &lt; n。（ ⌈ n / ( k + 1 ) ⌉ 即为 a ）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> t;<br>    cin&gt;&gt;t;<br>    <span class="hljs-keyword">while</span>(t--)<br>    &#123;<br>        <span class="hljs-type">int</span> n,k;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;n,&amp;k);<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">ceil</span>(<span class="hljs-number">1.0</span>*n/(k+<span class="hljs-number">1</span>))*(k+<span class="hljs-number">1</span>)-k&lt;n)<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;yo xi no forever!\n&quot;</span>);<br>        <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;ma la se mi no.1!\n&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>补充：也可以说 若 n 满足存在正整数 a 使得 n = ( a - 1 ) * k + a ，等价于 ( n - 1 ) / ( k + 1 )为整数时，先手必输<br />
+代码如下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> t;<br>    cin&gt;&gt;t;<br>    <span class="hljs-keyword">while</span>(t--)<br>    &#123;<br>        <span class="hljs-type">int</span> n,k;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;n,&amp;k);<br>        <span class="hljs-keyword">if</span>((n<span class="hljs-number">-1.0</span>)/(k+<span class="hljs-number">1.0</span>)-(<span class="hljs-type">int</span>)((n<span class="hljs-number">-1.0</span>)/(k+<span class="hljs-number">1.0</span>))&gt;<span class="hljs-number">0.000001</span>)<span class="hljs-comment">//这里如果是1e-4就会WA</span><br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;yo xi no forever!\n&quot;</span>);<br>        <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;ma la se mi no.1!\n&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="e-seek-the-joker-ii"><a class="markdownIt-Anchor" href="#e-seek-the-joker-ii"></a> E Seek the Joker II</h1>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41311604/article/details/79980882">威佐夫博弈</a></p>
+<p>这个不太好现推了，走结论吧。</p>
+<p>( a &lt; b )<br />
+( sqrt(5.0) + 1 ) * ( b - a ) / 2 = a 时，先手必输。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">double</span> mysticalConstant = (<span class="hljs-number">1.0</span>+<span class="hljs-built_in">sqrt</span>(<span class="hljs-number">5.0</span>))/<span class="hljs-number">2.0</span>;<br>    <span class="hljs-type">int</span> T;<br>    cin&gt;&gt;T;<br>    <span class="hljs-keyword">while</span>(T--)<br>    &#123;<br>        <span class="hljs-type">int</span> n,x;<br>        cin&gt;&gt;n&gt;&gt;x;<br>        <span class="hljs-type">int</span> a=x<span class="hljs-number">-1</span>,b=n-x;<br>        <span class="hljs-keyword">if</span>(a&gt;b) <span class="hljs-built_in">swap</span>(a,b);<br>        <span class="hljs-type">int</span> temp = (b-a)*mysticalConstant;<br>        <span class="hljs-keyword">if</span>(temp!=a) cout&lt;&lt;<span class="hljs-string">&quot;yo xi no forever!\n&quot;</span>;<br>        <span class="hljs-keyword">else</span> cout&lt;&lt;<span class="hljs-string">&quot;ma la se mi no.1!\n&quot;</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="f-成绩查询ing"><a class="markdownIt-Anchor" href="#f-成绩查询ing"></a> F 成绩查询ing</h1>
+<p>需要构建两组映射：名字与个人信息，成绩与名字<br />
+这里多构建了一组：名字与序号（nn），序号与个人信息（stu），成绩与名字（ms）</p>
+<p>成绩对应的名字用set存可以直接按字典序排列</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br>map&lt;<span class="hljs-type">int</span>,set&lt;string&gt; &gt;ms;<br>set&lt;string&gt;::iterator it;<br>map&lt;string,<span class="hljs-type">int</span>&gt;nn;<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">stud</span><br>&#123;<br>    <span class="hljs-type">int</span> gra,sex,num;<br>    <span class="hljs-comment">//string na;</span><br>&#125;stu[<span class="hljs-number">100005</span>];<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> n,i;<br>    string ge;<br> <br>    cin&gt;&gt;n;<br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)<br>    &#123;<br>        cin&gt;&gt;ge;<br>        nn[ge]=i;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d&quot;</span>,&amp;stu[i].gra,&amp;stu[i].sex,&amp;stu[i].num);<br>        ms[stu[i].gra].<span class="hljs-built_in">insert</span>(ge);<br>    &#125;<br>    <span class="hljs-type">int</span> t,o;<br>    cin&gt;&gt;t;<br>    <span class="hljs-keyword">while</span>(t--)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;o);<br>        <span class="hljs-keyword">if</span>(o==<span class="hljs-number">1</span>)<br>        &#123;<br>            cin&gt;&gt;ge;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d %d %d\n&quot;</span>,<br>                   stu[nn[ge]].gra,stu[nn[ge]].num,stu[nn[ge]].sex);<span class="hljs-comment">//注意顺序</span><br>        &#125;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;o);<br>            <span class="hljs-keyword">if</span>(!ms[o].<span class="hljs-built_in">empty</span>())<br>            &#123;<br>                <span class="hljs-keyword">for</span>(it=ms[o].<span class="hljs-built_in">begin</span>();it!=ms[o].<span class="hljs-built_in">end</span>();it++)<br>                &#123;<br>                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s\n&quot;</span>,(*it).<span class="hljs-built_in">c_str</span>());<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="g-贪吃的派蒙"><a class="markdownIt-Anchor" href="#g-贪吃的派蒙"></a> G 贪吃的派蒙</h1>
+<p>先找出派蒙的位置（pmi），计算出派蒙左边的人一轮下来所要吃的最少数量ami和最多数量amx，</p>
+<p>依靠 ami &lt; k &amp;&amp; amx + pmn &gt;= k 判断第一次轮到派蒙时能不能被派蒙吃尽，如果不能，总量减去派蒙吃掉的（pmn）后，每轮ami与amx加上派蒙外所有人的最小值与最大值，再进行比较。amx &gt; k 为止。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span><br> <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> t;<br>    cin&gt;&gt;t;<br>    <span class="hljs-keyword">while</span>(t--)<br>    &#123;<br>        <span class="hljs-type">int</span> n,k,pmi,pmn=<span class="hljs-number">0</span>,i,f=<span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> r[<span class="hljs-number">100005</span>]= &#123;<span class="hljs-number">0</span>&#125;;<br>        cin&gt;&gt;n&gt;&gt;k;<br>        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>; i&lt;=n; i++)<br>        &#123;<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;r[i]);<br>            <span class="hljs-keyword">if</span>(r[i]&gt;pmn)<br>            &#123;<br>                pmn=r[i];<br>                pmi=i;<br>            &#125;<br>        &#125;<br>        ll ami=pmi<span class="hljs-number">-1</span>,amx=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>; i&lt;pmi; i++)amx+=r[i];<br>        <span class="hljs-keyword">if</span>(ami&lt;k&amp;&amp;amx+pmn&gt;=k)f=<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>            <span class="hljs-keyword">while</span>(amx&lt;=k)<br>            &#123;<br>                k-=pmn;<br>                ami+=n<span class="hljs-number">-1</span>;<span class="hljs-comment">//+所有人的最小值</span><br>                <span class="hljs-keyword">for</span>(i=pmi+<span class="hljs-number">1</span>; i&lt;=n; i++)amx+=r[i];<span class="hljs-comment">//+后面人的最大值</span><br>                <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>; i&lt;pmi; i++)amx+=r[i];<span class="hljs-comment">//+前面人的最大值</span><br>                <span class="hljs-keyword">if</span>(ami&lt;k&amp;&amp;amx+pmn&gt;=k)<br>                &#123;<br>                    f=<span class="hljs-number">1</span>;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(f)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;YES\n&quot;</span>);<br>        <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;NO\n&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="h-数羊"><a class="markdownIt-Anchor" href="#h-数羊"></a> H 数羊</h1>
+<p>打表找规律</p>
+<p>m = 0 时，A( n , 0 ) = n + 2 ;（n = 1 时特判 A( 1, 0 ) = 2 ）<br />
+m = 1 时，A( n , 1 ) = 2 * n ；<br />
+m = 2 时，A( n , 2 ) = 2<sup>n</sup>。</p>
+<p>m = 2 时需要用到快速幂。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span><br><span class="hljs-type">const</span> ll mod=<span class="hljs-number">998244353</span>;<br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function">ll <span class="hljs-title">qm</span><span class="hljs-params">(ll m)</span></span><br><span class="hljs-function"></span>&#123;<br>    ll ans=<span class="hljs-number">1</span>,n=<span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">while</span>(m)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(m&amp;<span class="hljs-number">1</span>)ans=ans*n%mod;<br>        n=n*n%mod;<br>        m&gt;&gt;=<span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans%mod;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    ll t,n,m;<br>    cin&gt;&gt;t;<br>    <span class="hljs-keyword">while</span>(t--)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld%lld&quot;</span>,&amp;n,&amp;m);<br>        <span class="hljs-keyword">if</span>(m==<span class="hljs-number">0</span>)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(n==<span class="hljs-number">1</span>)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;2\n&quot;</span>);<span class="hljs-comment">//特判</span><br>            <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,n+<span class="hljs-number">2</span>);<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(m==<span class="hljs-number">1</span>)<br>        &#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,<span class="hljs-number">2</span>*n);<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,<span class="hljs-built_in">qm</span>(n));<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="i-买花"><a class="markdownIt-Anchor" href="#i-买花"></a> I 买花</h1>
+<p>若第一天买 a 朵，则第二天有 a * 11(B) 朵，第三天有 a * 111(B) 朵，……，第十五天有 a * 111 1111 1111 1111(B) 朵，则直接遍历[ 11 , 111 , … , 111 1111 1111 1111 ](B)，目标量能否被其中元素整除，若能则可行。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br> <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> k[]=&#123;<span class="hljs-number">3</span>,<span class="hljs-number">7</span>,<span class="hljs-number">15</span>,<span class="hljs-number">31</span>,<span class="hljs-number">63</span>,<span class="hljs-number">127</span>,<span class="hljs-number">255</span>,<span class="hljs-number">511</span>,<span class="hljs-number">1023</span>,<span class="hljs-number">2047</span>,<span class="hljs-number">4095</span>,<span class="hljs-number">8191</span>,<span class="hljs-number">16383</span>,<span class="hljs-number">32767</span>&#125;;<br>    <span class="hljs-type">int</span> i<span class="hljs-comment">/*0-13*/</span>,n,t;<br>    cin&gt;&gt;t;<br>    <span class="hljs-keyword">while</span>(t--)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);<br>        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;=<span class="hljs-number">13</span>;i++)<br>            <span class="hljs-keyword">if</span>(n%k[i]==<span class="hljs-number">0</span>)<span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">if</span>(i==<span class="hljs-number">14</span>)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;N0\n&quot;</span>);<span class="hljs-comment">//说明没有能整除情况</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;YE5\n&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="j-这是一题简单的模拟"><a class="markdownIt-Anchor" href="#j-这是一题简单的模拟"></a> J 这是一题简单的模拟</h1>
+<p>可以直接用二维数组建图，检验题给数据。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br> <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> n,m,f,t,co,a,mi=<span class="hljs-number">0x7fffffff</span>,i;<br>    cin&gt;&gt;n&gt;&gt;m;<br>    <span class="hljs-type">int</span> r[<span class="hljs-number">302</span>][<span class="hljs-number">302</span>]= &#123;<span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-keyword">while</span>(m--)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d&quot;</span>,&amp;f,&amp;t,&amp;co);<br>        r[f][t]=co;<br>        r[t][f]=co;<br>    &#125;<br>    cin&gt;&gt;a;<br>    <span class="hljs-type">int</span> p[<span class="hljs-number">302</span>]= &#123;<span class="hljs-number">0</span>&#125;,c[<span class="hljs-number">302</span>]= &#123;<span class="hljs-number">0</span>&#125;,g,fl;<span class="hljs-comment">//p存储题给顺序，c检验重复城</span><br>    <span class="hljs-keyword">while</span>(a--)<br>    &#123;<br>        fl=<span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">memset</span>(p,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span> p);<br>        <span class="hljs-built_in">memset</span>(c,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span> c);<br>        cin&gt;&gt;g;<br>        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>; i&lt;=g; i++)<br>        &#123;<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;p[i]);<br>            <span class="hljs-keyword">if</span>(!c[p[i]])c[p[i]]=<span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">else</span> fl=<span class="hljs-number">0</span>;<span class="hljs-comment">//如有重复城</span><br>        &#125;<br>        <span class="hljs-keyword">if</span>(g!=n||!fl)<span class="hljs-keyword">continue</span>;<br>        fl=<span class="hljs-number">1</span>;<br>        f=<span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> cou=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>; i&lt;=g&amp;&amp;fl; i++)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(r[f][p[i]])cou+=r[f][p[i]];<br>            <span class="hljs-keyword">else</span> fl=<span class="hljs-number">0</span>;<br>            f=p[i];<br>        &#125;<br>        <span class="hljs-keyword">if</span>(r[f][<span class="hljs-number">0</span>]&amp;&amp;fl)cou+=r[f][<span class="hljs-number">0</span>];<span class="hljs-comment">//注意回家路</span><br>            <span class="hljs-keyword">else</span> fl=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span>(fl&amp;&amp;cou&lt;=mi)mi=cou;<br>    &#125;<br>    <span class="hljs-keyword">if</span>(mi&lt;<span class="hljs-number">0x7fffffff</span>)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,mi);<br>    <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;-1&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="k-黑洞密码"><a class="markdownIt-Anchor" href="#k-黑洞密码"></a> K 黑洞密码</h1>
+<p>字符串处理，注意好对26溢出的处理即可。</p>
+<p>注：对于二维数组 a[ 4 ][ 4 ] ，a[ 0 ][ 5 ] 即代表 a[ 1 ][ 0 ]，这个在这里很好用。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br> <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a[<span class="hljs-number">4</span>][<span class="hljs-number">4</span>]=&#123;<span class="hljs-number">0</span>&#125;,in=<span class="hljs-number">0</span>,ch=<span class="hljs-number">0</span>,i=<span class="hljs-number">0</span>,j;<br>    <span class="hljs-type">char</span> c[<span class="hljs-number">4</span>][<span class="hljs-number">4</span>],g;<br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">32</span>;i++)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%c&quot;</span>,&amp;g);<br>        <span class="hljs-keyword">if</span>(g&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;g&lt;=<span class="hljs-string">&#x27;9&#x27;</span>)a[<span class="hljs-number">0</span>][in++]=g-<span class="hljs-string">&#x27;0&#x27;</span>;<br>        <span class="hljs-keyword">else</span> c[<span class="hljs-number">0</span>][ch++]=g;<br>    &#125;<br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;=<span class="hljs-number">3</span>;i++)<br>    &#123;<br>        <span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;=<span class="hljs-number">3</span>;j++)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(c[i][j]&gt;=<span class="hljs-string">&#x27;A&#x27;</span>&amp;&amp;c[i][j]&lt;=<span class="hljs-string">&#x27;Z&#x27;</span>)<br>            &#123;<br>                <span class="hljs-keyword">if</span>(c[i][j]+a[i][j]&gt;<span class="hljs-string">&#x27;Z&#x27;</span>)c[i][j]=<span class="hljs-string">&#x27;a&#x27;</span>+c[i][j]+a[i][j]-<span class="hljs-string">&#x27;Z&#x27;</span>;<br>                <span class="hljs-keyword">else</span> c[i][j]+=a[i][j];<br>            &#125;<br>            <span class="hljs-keyword">else</span><br>            &#123;<br>                <span class="hljs-keyword">if</span>(c[i][j]+a[i][j]&gt;<span class="hljs-string">&#x27;z&#x27;</span>)c[i][j]=<span class="hljs-string">&#x27;A&#x27;</span>+c[i][j]+a[i][j]-<span class="hljs-string">&#x27;z&#x27;</span>;<br>                <span class="hljs-keyword">else</span> c[i][j]+=a[i][j];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">for</span>(j=<span class="hljs-number">3</span>;j&gt;=<span class="hljs-number">0</span>;j--)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>,c[i][j]);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="l-建立火车站"><a class="markdownIt-Anchor" href="#l-建立火车站"></a> L 建立火车站</h1>
+<p>二分，对于长度，端点值及其右侧均为可行解，故向左取整。</p>
+<p>注：存在 k = 0 的测试组</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br> <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">long</span> <span class="hljs-type">long</span> a[<span class="hljs-number">100005</span>];<br>    <span class="hljs-type">long</span> <span class="hljs-type">long</span> n,k,i;<br>    cin&gt;&gt;n&gt;&gt;k;<br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>; i&lt;=n; i++)<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>,&amp;a[i]);<br>    <span class="hljs-built_in">sort</span>(a+<span class="hljs-number">1</span>,a+n+<span class="hljs-number">1</span>);<br>    <span class="hljs-type">long</span> <span class="hljs-type">long</span> l=<span class="hljs-number">1</span>,r=a[n]-a[<span class="hljs-number">1</span>]+<span class="hljs-number">5</span>;<br>    <span class="hljs-keyword">while</span>(l&lt;r)<br>    &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-type">long</span> mid=l+r&gt;&gt;<span class="hljs-number">1</span>;<br>        <span class="hljs-type">long</span> <span class="hljs-type">long</span> cou=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">2</span>; i&lt;=n; i++)<br>        &#123;<br>            <span class="hljs-comment">//if(a[i]-a[i-1]&gt;=mid)</span><br>            &#123;<br>                cou+=(a[i]-a[i<span class="hljs-number">-1</span>]<span class="hljs-number">-1</span>)/mid;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(cou&lt;=k)r=mid;<br>        <span class="hljs-keyword">else</span> l=mid+<span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld&quot;</span>,l);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="ed"><a class="markdownIt-Anchor" href="#ed"></a> ED</h1>
+<p>做到最后莫划水，打表有惊喜。</p>
+<p>打表天下第一！</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" class="category-chain-item">算法竞赛</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/%E6%AF%94%E8%B5%9B%E4%B8%8E%E9%A2%98%E9%9B%86/" class="category-chain-item">比赛与题集</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解</div>
+      <div>http://example.com/2021/01/31/第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>F Juny</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年1月31日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/07/26/How%20did%20I%20come%20from/" title="How did I come from?">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">How did I come from?</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/29/%E5%8A%A0%E5%88%86%E4%BA%8C%E5%8F%89%E6%A0%91-DP/" title="加分二叉树-DP">
+                        <span class="hidden-mobile">加分二叉树-DP</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

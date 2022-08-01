@@ -16,23 +16,23 @@
   <meta name="author" content="F Juny">
   <meta name="keywords" content="">
   
-    <meta name="description" content="2022.07.24  CY老师组织了2022暑假第三次周报，期间RK学长期望与实验室同学来充实友链页；我向学长表示可能会离开CSDN，计划租ECS来建站，之前的友链可能就要改掉了；同时向学长表示关于此计划还要咨询他很多问题，学长则表示：  于是从21:27搞到了00:25~ 并通过此文章所述办法爬下来了之前CSDN上面的文章，为迁移和备份做好了准备~  2022.07.25  对照着Hexo">
+    <meta name="description" content="题目来源：NEFU OJ-971 硬币数目   OP DP 感谢sl大佬的讲解  思路 面对这个数据量，dfs肯定会爆TLE，所以打算用DP。 对于一般情况，状态转移也不复杂： 在求最小硬币数时，对于第 i 枚硬币，面值为 v [ i ] ，金额为 j 时，f [ i , j ]&#x3D;min( f [ i - 1 , j ] , f [ i , j - v [ i ] + 1 ) 最大硬币数则为 f">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How did I come from?">
-<meta property="og:url" content="http://example.com/2022/07/26/How%20did%20I%20come%20from/index.html">
+<meta property="og:title" content="关于 硬币数目 的思路+代码">
+<meta property="og:url" content="http://example.com/2021/01/23/%E5%85%B3%E4%BA%8E%20%E7%A1%AC%E5%B8%81%E6%95%B0%E7%9B%AE%20%E7%9A%84%E6%80%9D%E8%B7%AF+%E4%BB%A3%E7%A0%81/index.html">
 <meta property="og:site_name" content="Yu_Tang">
-<meta property="og:description" content="2022.07.24  CY老师组织了2022暑假第三次周报，期间RK学长期望与实验室同学来充实友链页；我向学长表示可能会离开CSDN，计划租ECS来建站，之前的友链可能就要改掉了；同时向学长表示关于此计划还要咨询他很多问题，学长则表示：  于是从21:27搞到了00:25~ 并通过此文章所述办法爬下来了之前CSDN上面的文章，为迁移和备份做好了准备~  2022.07.25  对照着Hexo">
+<meta property="og:description" content="题目来源：NEFU OJ-971 硬币数目   OP DP 感谢sl大佬的讲解  思路 面对这个数据量，dfs肯定会爆TLE，所以打算用DP。 对于一般情况，状态转移也不复杂： 在求最小硬币数时，对于第 i 枚硬币，面值为 v [ i ] ，金额为 j 时，f [ i , j ]&#x3D;min( f [ i - 1 , j ] , f [ i , j - v [ i ] + 1 ) 最大硬币数则为 f">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/905d71a9510340d08494e293a1a81aa9.png">
-<meta property="article:published_time" content="2022-07-26T02:06:57.000Z">
-<meta property="article:modified_time" content="2022-07-28T10:21:06.927Z">
+<meta property="og:image" content="https://s2.loli.net/2022/08/02/G2J6aDkMOc3eNXU.png">
+<meta property="article:published_time" content="2021-01-23T15:53:48.000Z">
+<meta property="article:modified_time" content="2022-08-01T16:23:32.172Z">
 <meta property="article:author" content="Fu Junyuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/905d71a9510340d08494e293a1a81aa9.png">
+<meta name="twitter:image" content="https://s2.loli.net/2022/08/02/G2J6aDkMOc3eNXU.png">
   
   
   
-  <title>How did I come from? - Yu_Tang</title>
+  <title>关于 硬币数目 的思路+代码 - Yu_Tang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="How did I come from?"></span>
+            <span id="subtitle" data-typed-text="关于 硬币数目 的思路+代码"></span>
           
         </div>
 
@@ -210,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-07-26 10:06" pubdate>
-          2022年7月26日 上午
+        <time datetime="2021-01-23 23:53" pubdate>
+          2021年1月23日 晚上
         </time>
       </span>
     
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          214 字
+          1.1k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          2 分钟
+          10 分钟
         
       </span>
     
@@ -271,22 +271,97 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">How did I come from?</h1>
+            <h1 style="display: none">关于 硬币数目 的思路+代码</h1>
             
             
               <div class="markdown-body">
                 
-                <blockquote>
-<p>2022.07.24</p>
-</blockquote>
-<p>CY老师组织了2022暑假第三次周报，期间RK学长期望与实验室同学来充实友链页；我向学长表示可能会离开CSDN，计划租ECS来建站，之前的友链可能就要改掉了；同时向学长表示关于此计划还要咨询他很多问题，学长则表示：</p>
-<p><img src="https://img-blog.csdnimg.cn/905d71a9510340d08494e293a1a81aa9.png" srcset="/img/loading.gif" lazyload alt="人和人的体质不能一概而论，学长显然高估了我的能力" /></p>
-<p>于是从21:27搞到了00:25~</p>
-<p>并通过<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33976344/article/details/123800804">此文章</a>所述办法爬下来了之前CSDN上面的文章，为迁移和备份做好了准备~</p>
-<blockquote>
-<p>2022.07.25</p>
-</blockquote>
-<p>对照着<a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/">Hexo Fluid 配置指南</a>忙活了一晚上，博客终于初具人形~</p>
+                <p>题目来源：<a target="_blank" rel="noopener" href="http://acm.nefu.edu.cn/problemShow.php?problem_id=971">NEFU OJ-971 硬币数目</a><br />
+<img src="https://s2.loli.net/2022/08/02/G2J6aDkMOc3eNXU.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /></p>
+<h2 id="op"><a class="markdownIt-Anchor" href="#op"></a> OP</h2>
+<p>DP<br />
+感谢<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39354847">sl大佬</a>的讲解</p>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p>面对这个数据量，dfs肯定会爆TLE，所以打算用DP。</p>
+<p>对于一般情况，状态转移也不复杂：<br />
+在求最小硬币数时，对于第 i 枚硬币，面值为 v [ i ] ，金额为 j 时，f [ i , j ]=min( f [ i - 1 , j ] , f [ i , j - v [ i ] + 1 )<br />
+最大硬币数则为 f [ i , j ]=max( f [ i - 1 , j ] , f [ i , j - v [ i ] + 1 )<br />
+通俗来说，求最小硬币数，在如上情况下，就是求<strong>没有此枚硬币时金额 j 的最小硬币数</strong> 与 <strong>用一枚此硬币的情况——在金额 j - v [ i ] 时，再用一枚此硬币</strong>这两种情况的硬币数最小值。最大值同理。</p>
+<p>但是对于起始情况要特殊处理：<br />
+在求最小值时，将待处理数组的除0外每一位赋为一个足够大值，第0位赋为0。<br />
+最大值时赋为一个足够小值。</p>
+<p>特殊处理后，如果在dp完成后，金额 j 无法被组成，则金额 j 保留为极值。（经测试，oj中无非法数据，即每个总金额值必定可以由硬币搭配出）</p>
+<p>为方便理解，附手推过程：<br />
+输入数据：<br />
+3 7<br />
+2 4 3<br />
+以求最小值为例</p>
+<table>
+<thead>
+<tr>
+<th>i \ j</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>+∞</td>
+<td>+∞</td>
+<td>+∞</td>
+<td>+∞</td>
+<td>+∞</td>
+<td>+∞</td>
+<td>+∞</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>+∞</td>
+<td>1</td>
+<td>+∞</td>
+<td>2</td>
+<td>+∞</td>
+<td>2</td>
+<td>+∞</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0</td>
+<td>+∞</td>
+<td>1</td>
+<td>+∞</td>
+<td>1</td>
+<td>+∞</td>
+<td>2</td>
+<td>+∞</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0</td>
+<td>+∞</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br>using namespace <span class="hljs-built_in">std</span>;<br><span class="hljs-type">int</span> n,s;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N=<span class="hljs-number">1e4</span>+<span class="hljs-number">10</span>;<br><span class="hljs-type">int</span> w[N],dp[N];<br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;n,&amp;s)!=EOF)<br>	&#123;<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;w[i]);<br>		<span class="hljs-built_in">memset</span>(dp,<span class="hljs-number">0x3f</span>,<span class="hljs-keyword">sizeof</span> dp);<span class="hljs-comment">//足够大值</span><br>		dp[<span class="hljs-number">0</span>]=<span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)<br>			<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=w[i];j&lt;=s;j++)<br>			&#123;<br>				dp[j]=min(dp[j],dp[j-w[i]]+<span class="hljs-number">1</span>);	<br>			&#125; <br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,dp[s]);<br>		<span class="hljs-built_in">memset</span>(dp,<span class="hljs-number">0xcf</span>,<span class="hljs-keyword">sizeof</span> dp);<span class="hljs-comment">//足够小值</span><br>		dp[<span class="hljs-number">0</span>]=<span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)<br>			<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=w[i];j&lt;=s;j++)<br>			&#123;<br>				dp[j]=max(dp[j],dp[j-w[i]]+<span class="hljs-number">1</span>);	<br>			&#125; <br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,dp[s]);<br>	&#125;<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="ed"><a class="markdownIt-Anchor" href="#ed"></a> ED</h2>
+<p>dp的初值选取一定要妥当~<br />
+相似题：<a target="_blank" rel="noopener" href="http://acm.nefu.edu.cn/problemShow.php?problem_id=1717">NEFU OJ-1717 货币系统</a></p>
 
                 
               </div>
@@ -294,6 +369,34 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" class="category-chain-item">算法竞赛</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/DP%E4%B8%8E%E8%B4%AA%E5%BF%83/" class="category-chain-item">DP与贪心</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -304,8 +407,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>How did I come from?</div>
-      <div>http://example.com/2022/07/26/How did I come from/</div>
+      <div>关于 硬币数目 的思路+代码</div>
+      <div>http://example.com/2021/01/23/关于 硬币数目 的思路+代码/</div>
     </div>
     <div class="license-meta">
       
@@ -317,7 +420,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年7月26日</div>
+          <div>2021年1月23日</div>
         </div>
       
       
@@ -347,12 +450,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2021/01/26/%E5%85%B3%E4%BA%8E%20%E9%98%BF%E5%8D%8E%E5%88%86%E7%A1%AC%E5%B8%81%20%E4%B8%80%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF+%E6%B3%A8%E6%84%8F%E7%82%B9+%E4%BB%A3%E7%A0%81%EF%BC%88%E6%95%B0%E7%BB%84%E5%88%86%E6%88%90%E5%B7%AE%E6%9C%80%E5%B0%8F%E7%9A%84%E4%B8%A4%E9%83%A8%E5%88%86%EF%BC%89/" title="关于 阿华分硬币 一题的思路+注意点+代码（数组分成差最小的两部分）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">关于 阿华分硬币 一题的思路+注意点+代码（数组分成差最小的两部分）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/31/%E7%AC%AC%E5%85%AB%E5%B1%8A%E2%80%9C%E5%9B%BE%E7%81%B5%E6%9D%AF%E2%80%9DNEUQ-ACM%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B8%AA%E4%BA%BA%E8%B5%9B%20%E5%85%A8%E9%A2%98%E8%A7%A3/" title="第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解">
-                        <span class="hidden-mobile">第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解</span>
+                      <a href="/2021/01/23/%E9%BB%91%E9%BE%99%E6%B1%9F%E5%86%9C%E5%9E%A6%E7%A7%91%E6%8A%80%E8%81%8C%E4%B8%9A%E5%AD%A6%E9%99%A2%E5%96%9C%E8%BF%8E%E5%AF%92%E5%81%87%E5%A4%9A%E6%A0%A1%E8%81%94%E8%B5%9B2%20%E5%85%A8%E9%A2%98%E8%A7%A3/" title="黑龙江农垦科技职业学院喜迎寒假多校联赛2 全题解">
+                        <span class="hidden-mobile">黑龙江农垦科技职业学院喜迎寒假多校联赛2 全题解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

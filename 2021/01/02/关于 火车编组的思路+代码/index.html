@@ -16,23 +16,24 @@
   <meta name="author" content="F Juny">
   <meta name="keywords" content="">
   
-    <meta name="description" content="2022.07.24  CY老师组织了2022暑假第三次周报，期间RK学长期望与实验室同学来充实友链页；我向学长表示可能会离开CSDN，计划租ECS来建站，之前的友链可能就要改掉了；同时向学长表示关于此计划还要咨询他很多问题，学长则表示：  于是从21:27搞到了00:25~ 并通过此文章所述办法爬下来了之前CSDN上面的文章，为迁移和备份做好了准备~  2022.07.25  对照着Hexo">
+    <meta name="description" content="OP 大体思路 有关限定条件的想法 代码 ED   题目来源：NEFU OJ 栈-火车编组 详细链接已补   OP oj中没有配图，我就没有 想透 题，最后查到这里才完全理解，下面的示意图亦出自该帖。  大体思路  以样例为例，题意即为将A端（左至右）1，2，3，4，通过编组站调至B端（左至右）3，2，4，1。 我们可以将轨道中段视为栈，从A方向入栈，向B方向出栈。 决定出栈还是继续入栈的判据即">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How did I come from?">
-<meta property="og:url" content="http://example.com/2022/07/26/How%20did%20I%20come%20from/index.html">
+<meta property="og:title" content="关于	火车编组的思路+代码">
+<meta property="og:url" content="http://example.com/2021/01/02/%E5%85%B3%E4%BA%8E%20%E7%81%AB%E8%BD%A6%E7%BC%96%E7%BB%84%E7%9A%84%E6%80%9D%E8%B7%AF+%E4%BB%A3%E7%A0%81/index.html">
 <meta property="og:site_name" content="Yu_Tang">
-<meta property="og:description" content="2022.07.24  CY老师组织了2022暑假第三次周报，期间RK学长期望与实验室同学来充实友链页；我向学长表示可能会离开CSDN，计划租ECS来建站，之前的友链可能就要改掉了；同时向学长表示关于此计划还要咨询他很多问题，学长则表示：  于是从21:27搞到了00:25~ 并通过此文章所述办法爬下来了之前CSDN上面的文章，为迁移和备份做好了准备~  2022.07.25  对照着Hexo">
+<meta property="og:description" content="OP 大体思路 有关限定条件的想法 代码 ED   题目来源：NEFU OJ 栈-火车编组 详细链接已补   OP oj中没有配图，我就没有 想透 题，最后查到这里才完全理解，下面的示意图亦出自该帖。  大体思路  以样例为例，题意即为将A端（左至右）1，2，3，4，通过编组站调至B端（左至右）3，2，4，1。 我们可以将轨道中段视为栈，从A方向入栈，向B方向出栈。 决定出栈还是继续入栈的判据即">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/905d71a9510340d08494e293a1a81aa9.png">
-<meta property="article:published_time" content="2022-07-26T02:06:57.000Z">
-<meta property="article:modified_time" content="2022-07-28T10:21:06.927Z">
+<meta property="og:image" content="https://s2.loli.net/2022/08/02/eSzPV3bDfWFQH67.png">
+<meta property="og:image" content="https://s2.loli.net/2022/08/02/dgY8GymzcHrRVlP.png">
+<meta property="article:published_time" content="2021-01-02T06:10:19.000Z">
+<meta property="article:modified_time" content="2022-08-01T16:06:07.756Z">
 <meta property="article:author" content="Fu Junyuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/905d71a9510340d08494e293a1a81aa9.png">
+<meta name="twitter:image" content="https://s2.loli.net/2022/08/02/eSzPV3bDfWFQH67.png">
   
   
   
-  <title>How did I come from? - Yu_Tang</title>
+  <title>关于	火车编组的思路+代码 - Yu_Tang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="How did I come from?"></span>
+            <span id="subtitle" data-typed-text="关于	火车编组的思路+代码"></span>
           
         </div>
 
@@ -210,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-07-26 10:06" pubdate>
-          2022年7月26日 上午
+        <time datetime="2021-01-02 14:10" pubdate>
+          2021年1月2日 下午
         </time>
       </span>
     
@@ -222,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          214 字
+          1.2k 字
         
       </span>
     
@@ -233,7 +234,7 @@
         
         
         
-          2 分钟
+          11 分钟
         
       </span>
     
@@ -271,22 +272,40 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">How did I come from?</h1>
+            <h1 style="display: none">关于	火车编组的思路+代码</h1>
             
             
               <div class="markdown-body">
                 
-                <blockquote>
-<p>2022.07.24</p>
-</blockquote>
-<p>CY老师组织了2022暑假第三次周报，期间RK学长期望与实验室同学来充实友链页；我向学长表示可能会离开CSDN，计划租ECS来建站，之前的友链可能就要改掉了；同时向学长表示关于此计划还要咨询他很多问题，学长则表示：</p>
-<p><img src="https://img-blog.csdnimg.cn/905d71a9510340d08494e293a1a81aa9.png" srcset="/img/loading.gif" lazyload alt="人和人的体质不能一概而论，学长显然高估了我的能力" /></p>
-<p>于是从21:27搞到了00:25~</p>
-<p>并通过<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33976344/article/details/123800804">此文章</a>所述办法爬下来了之前CSDN上面的文章，为迁移和备份做好了准备~</p>
-<blockquote>
-<p>2022.07.25</p>
-</blockquote>
-<p>对照着<a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/">Hexo Fluid 配置指南</a>忙活了一晚上，博客终于初具人形~</p>
+                <p><ul class="markdownIt-TOC">
+<li><a href="#op">OP</a></li>
+<li><a href="#%E5%A4%A7%E4%BD%93%E6%80%9D%E8%B7%AF">大体思路</a></li>
+<li><a href="#%E6%9C%89%E5%85%B3%E9%99%90%E5%AE%9A%E6%9D%A1%E4%BB%B6%E7%9A%84%E6%83%B3%E6%B3%95">有关限定条件的想法</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81">代码</a></li>
+<li><a href="#ed">ED</a></li>
+</ul>
+<br />
+题目来源：<a target="_blank" rel="noopener" href="http://acm.nefu.edu.cn/problemShow.php?problem_id=1628">NEFU OJ 栈-火车编组</a> 详细链接已补<br />
+<img src="https://s2.loli.net/2022/08/02/eSzPV3bDfWFQH67.png" srcset="/img/loading.gif" lazyload alt="咕咕咕" /></p>
+<h2 id="op"><a class="markdownIt-Anchor" href="#op"></a> OP</h2>
+<p>oj中没有配图，我就没有 想透 题，最后查到<a target="_blank" rel="noopener" href="https://blog.csdn.net/czjl6886/article/details/102537461">这里</a>才完全理解，下面的示意图亦出自该帖。</p>
+<h2 id="大体思路"><a class="markdownIt-Anchor" href="#大体思路"></a> 大体思路</h2>
+<p><img src="https://s2.loli.net/2022/08/02/dgY8GymzcHrRVlP.png" srcset="/img/loading.gif" lazyload alt="感谢大佬" /><br />
+以样例为例，题意即为将A端（左至右）1，2，3，4，通过编组站调至B端（左至右）3，2，4，1。</p>
+<p>我们可以将轨道中段视为栈，从A方向入栈，向B方向出栈。</p>
+<p>决定出栈还是继续入栈的判据即为目前栈顶元素与目标车厢编号的大小关系：<br />
+——如果小于目标车厢编号，则继续从A端入栈；<br />
+——如果等于，则出栈进行编组；<br />
+——如果大于，则请看下一个二级目录。</p>
+<p>某车厢出栈编组后，目标车厢编号即变为目标序列的下一元素，直至目标序列被编组完毕。</p>
+<h2 id="有关限定条件的想法"><a class="markdownIt-Anchor" href="#有关限定条件的想法"></a> 有关限定条件的想法</h2>
+<p>无论是在oj中，还是图源帖中，对题目的描述始终没有明确入栈的车厢是否可以出栈至A端，但是就我的判断，题目中不能。</p>
+<p>图源帖中的问题是判断目标序列能否达成，如果能出栈至A端，则不存在非法序列。同理，oj经测试，所有测试组均合法。</p>
+<p>对于图源帖中的问题，如果目前栈顶元素大于目标车厢编号，则可判断该序列非法。若考虑可以出栈至A端，则可以出栈至A端等待再次入栈。</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs javascript">#include &lt;bits/stdc++.<span class="hljs-property">h</span>&gt;<br>using namespace std;<br><br>int <span class="hljs-title function_">main</span>(<span class="hljs-params"></span>)<br>&#123;<br>    stack&lt;int&gt;ord;<span class="hljs-comment">//ord为A端</span><br>    stack&lt;int&gt;sta;<span class="hljs-comment">//sta为编组用栈</span><br>    int aim[<span class="hljs-number">105</span>],process=<span class="hljs-number">1</span>;<span class="hljs-comment">//aim记录目标序列，</span><br>                    		 <span class="hljs-comment">//process记录目标车厢编号</span><br>    int n,i;<br>    cin&gt;&gt;n;<br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">1</span>;i&lt;=n;i++)<br>    	cin&gt;&gt;aim[i];<br>    <span class="hljs-keyword">for</span>(i=n;i&gt;=<span class="hljs-number">1</span>;i--)<br>    	ord.<span class="hljs-title function_">push</span>(i);<br>    <span class="hljs-keyword">while</span>(process!=n+<span class="hljs-number">1</span>)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(!sta.<span class="hljs-title function_">empty</span>()&amp;&amp;sta.<span class="hljs-title function_">top</span>()&gt;aim[process])<br>        &#123;<br>            <span class="hljs-comment">/*ord.push(sta.top());这段注释掉的是出栈至A端</span><br><span class="hljs-comment">            sta.pop();</span><br><span class="hljs-comment">            cout&lt;&lt;&#x27;B&#x27;;*/</span><br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(sta.<span class="hljs-title function_">empty</span>()||sta.<span class="hljs-title function_">top</span>()&lt;aim[process])<br>        &#123;<br>            sta.<span class="hljs-title function_">push</span>(ord.<span class="hljs-title function_">top</span>());<br>            ord.<span class="hljs-title function_">pop</span>();<br>            cout&lt;&lt;<span class="hljs-string">&#x27;A&#x27;</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(sta.<span class="hljs-title function_">top</span>()==aim[process])<br>        &#123;<br>            sta.<span class="hljs-title function_">pop</span>();<br>            cout&lt;&lt;<span class="hljs-string">&#x27;B&#x27;</span>;<br>            process++;<span class="hljs-comment">//目标车厢改为下一个</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="ed"><a class="markdownIt-Anchor" href="#ed"></a> ED</h2>
+<p>另：对于空栈使用.top会RTE。</p>
 
                 
               </div>
@@ -294,6 +313,34 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" class="category-chain-item">算法竞赛</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -304,8 +351,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>How did I come from?</div>
-      <div>http://example.com/2022/07/26/How did I come from/</div>
+      <div>关于	火车编组的思路+代码</div>
+      <div>http://example.com/2021/01/02/关于 火车编组的思路+代码/</div>
     </div>
     <div class="license-meta">
       
@@ -317,7 +364,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年7月26日</div>
+          <div>2021年1月2日</div>
         </div>
       
       
@@ -347,12 +394,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2021/01/18/%E5%9B%9B%E7%82%B9%E5%85%B1%E5%9C%86%E7%9A%84%E5%88%A4%E5%AE%9A/" title="四点共圆的判定">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">四点共圆的判定</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/31/%E7%AC%AC%E5%85%AB%E5%B1%8A%E2%80%9C%E5%9B%BE%E7%81%B5%E6%9D%AF%E2%80%9DNEUQ-ACM%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B8%AA%E4%BA%BA%E8%B5%9B%20%E5%85%A8%E9%A2%98%E8%A7%A3/" title="第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解">
-                        <span class="hidden-mobile">第八届“图灵杯”NEUQ-ACM程序设计竞赛个人赛 全题解</span>
+                      <a href="/2020/12/27/%E5%85%B3%E4%BA%8E_Bsq%20AK%20ZUCCPC%E7%9A%84%E6%80%9D%E8%B7%AF+%E4%BB%A3%E7%A0%81/" title="关于	Bsq AK ZUCCPC的思路+代码">
+                        <span class="hidden-mobile">关于	Bsq AK ZUCCPC的思路+代码</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
