@@ -1,0 +1,721 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/assets/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="rgb(45,86,141)">
+  <meta name="author" content="F Juny">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="题目来源：Acwing.1402 星空之夜  题目描述  夜空深处，闪亮的星星以星群的形式出现在人们眼中，形态万千。 一个星群是指一组非空的在水平，垂直或对角线方向相邻的星星的集合。 一个星群不能是一个更大星群的一部分。 星群可能是相似的。 如果两个星群的形状、包含星星的数目相同，那么无论它们的朝向如何，都认为它们是相似的。 通常星群可能有 8 种朝向，如下图所示：  现在，我们用一个二维 01">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于 星空之夜 一题的思路+代码（连通块判重）">
+<meta property="og:url" content="https://tanyuu.github.io/2021/04/06/2021.01-06/%E5%85%B3%E4%BA%8E%20%E6%98%9F%E7%A9%BA%E4%B9%8B%E5%A4%9C%20%E4%B8%80%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF+%E4%BB%A3%E7%A0%81%EF%BC%88%E8%BF%9E%E9%80%9A%E5%9D%97%E5%88%A4%E9%87%8D%EF%BC%89/index.html">
+<meta property="og:site_name" content="Yu_Tang">
+<meta property="og:description" content="题目来源：Acwing.1402 星空之夜  题目描述  夜空深处，闪亮的星星以星群的形式出现在人们眼中，形态万千。 一个星群是指一组非空的在水平，垂直或对角线方向相邻的星星的集合。 一个星群不能是一个更大星群的一部分。 星群可能是相似的。 如果两个星群的形状、包含星星的数目相同，那么无论它们的朝向如何，都认为它们是相似的。 通常星群可能有 8 种朝向，如下图所示：  现在，我们用一个二维 01">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/f09a5db94d2a19bcc14ba95ae3fa58d8.gif">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/29d2a3c0064504156a4ac456f2f09ec4.gif">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/ffd194830ff946c37e8d9c5bbc63580c.gif">
+<meta property="article:published_time" content="2021-04-06T11:29:41.000Z">
+<meta property="article:modified_time" content="2022-08-02T01:51:19.633Z">
+<meta property="article:author" content="Fu Junyuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/f09a5db94d2a19bcc14ba95ae3fa58d8.gif">
+  
+  
+  
+  <title>关于 星空之夜 一题的思路+代码（连通块判重） - Yu_Tang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tanyuu.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>煜·塘</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/img/wide_home.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="关于 星空之夜 一题的思路+代码（连通块判重）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-04-06 19:29" pubdate>
+          2021年4月6日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">关于 星空之夜 一题的思路+代码（连通块判重）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>题目来源：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1404/">Acwing.1402 星空之夜</a></p>
+<blockquote>
+<p>题目描述</p>
+<blockquote>
+<p>夜空深处，闪亮的星星以星群的形式出现在人们眼中，形态万千。<br />
+一个星群是指一组非空的在水平，垂直或对角线方向相邻的星星的集合。<br />
+一个星群不能是一个更大星群的一部分。<br />
+星群可能是相似的。<br />
+如果两个星群的形状、包含星星的数目相同，那么无论它们的朝向如何，都认为它们是相似的。<br />
+通常星群可能有 8 种朝向，如下图所示：<br />
+<img src="https://img-blog.csdnimg.cn/img_convert/f09a5db94d2a19bcc14ba95ae3fa58d8.gif" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><br />
+现在，我们用一个二维 01 矩阵来表示夜空，如果一个位置上的数字是 1，那么说明这个位置上有一个星星，否则这个位置上的数字应该是 0。<br />
+给定一个夜空二维矩阵，请你将其中的所有星群用小写字母进行标记，标记时相似星群用同一字母，不相似星群用不同字母。<br />
+标注星群就是指将星群中所有的 1 替换为小写字母。</p>
+</blockquote>
+<p>输入描述</p>
+<blockquote>
+<p>第一行包含一个整数 W，表示矩阵宽度。<br />
+第二行包含一个整数 H，表示矩阵高度。<br />
+接下来 H 行，每行包含一个长度为 W 的 01 序列，用来描述整个夜空矩阵。</p>
+</blockquote>
+<p>输出描述</p>
+<blockquote>
+<p>输出标记完所有星群后的二维矩阵。<br />
+用小写字母标记星群的方法很多，我们将整个输出读取为一个字符串，能够使得这个字符串字典序最小的标记方式，就是我们想要的标记方式。<br />
+输出这个标记方式标出的最终二维矩阵。</p>
+</blockquote>
+<p>数据范围</p>
+<blockquote>
+<p>0≤W,H≤100,<br />
+0≤ 星群数量 ≤500,<br />
+0≤ 不相似星群数量 ≤26,<br />
+1≤ 星群中星星的数量 ≤160</p>
+</blockquote>
+<p>输入样例1</p>
+<blockquote>
+<p>23<br />
+15<br />
+10001000000000010000000<br />
+01111100011111000101101<br />
+01000000010001000111111<br />
+00000000010101000101111<br />
+00000111010001000000000<br />
+00001001011111000000000<br />
+10000001000000000000000<br />
+00101000000111110010000<br />
+00001000000100010011111<br />
+00000001110101010100010<br />
+00000100110100010000000<br />
+00010001110111110000000<br />
+00100001110000000100000<br />
+00001000100001000100101<br />
+00000001110001000111000</p>
+</blockquote>
+<p>输出样例1</p>
+<blockquote>
+<p>a000a0000000000b0000000<br />
+0aaaaa000ccccc000d0dd0d<br />
+0a0000000c000c000dddddd<br />
+000000000c0b0c000d0dddd<br />
+00000eee0c000c000000000<br />
+0000e00e0ccccc000000000<br />
+b000000e000000000000000<br />
+00b0f000000ccccc00a0000<br />
+0000f000000c000c00aaaaa<br />
+0000000ddd0c0b0c0a000a0<br />
+00000b00dd0c000c0000000<br />
+000g000ddd0ccccc0000000<br />
+00g0000ddd0000000e00000<br />
+0000b000d0000f000e00e0b<br />
+0000000ddd000f000eee000</p>
+</blockquote>
+<p>样例解释</p>
+<blockquote>
+<p>样例对应的星空图如下：<br />
+<img src="https://img-blog.csdnimg.cn/img_convert/29d2a3c0064504156a4ac456f2f09ec4.gif" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /><br />
+答案对应的标记后星空图如下：<br />
+<img src="https://img-blog.csdnimg.cn/img_convert/ffd194830ff946c37e8d9c5bbc63580c.gif" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述" /></p>
+</blockquote>
+</blockquote>
+<h2 id="op"><a class="markdownIt-Anchor" href="#op"></a> OP</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39354847/article/details/113359634">sl大佬的总结</a></p>
+<h2 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h2>
+<p>连通块判重的主要目的是将连通块的形状转换成哈希值，在这里，我们选择的策略为</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>h</mi><mi>a</mi><mi>s</mi><mi>h</mi><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msqrt><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><msub><mi>x</mi><mi>j</mi></msub><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mi mathvariant="normal">（</mi><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mi>y</mi><mi>j</mi></msub><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow></msqrt></mrow><annotation encoding="application/x-tex">hash=\sum^n_{i=1}\sum^n_{j=1}\sqrt{(x_i-x_j)^2+（y_i-y_j)^2}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">h</span><span class="mord mathdefault">a</span><span class="mord mathdefault">s</span><span class="mord mathdefault">h</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.0651740000000007em;vertical-align:-1.4137769999999998em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000007em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.4137769999999998em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.265821em;"><span class="svg-align" style="top:-3.8em;"><span class="pstrut" style="height:3.8em;"></span><span class="mord" style="padding-left:1em;"><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord cjk_fallback">（</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.225821em;"><span class="pstrut" style="height:3.8em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.8800000000000001em;"><svg width='400em' height='1.8800000000000001em' viewBox='0 0 400000 1944' preserveAspectRatio='xMinYMin slice'><path d='M1001,80H400000v40H1013.1s-83.4,268,-264.1,840c-180.7,
+572,-277,876.3,-289,913c-4.7,4.7,-12.7,7,-24,7s-12,0,-12,0c-1.3,-3.3,-3.7,-11.7,
+-7,-25c-35.3,-125.3,-106.7,-373.3,-214,-744c-10,12,-21,25,-33,39s-32,39,-32,39
+c-6,-5.3,-15,-14,-27,-26s25,-30,25,-30c26.7,-32.7,52,-63,76,-91s52,-60,52,-60
+s208,722,208,722c56,-175.3,126.3,-397.3,211,-666c84.7,-268.7,153.8,-488.2,207.5,
+-658.5c53.7,-170.3,84.5,-266.8,92.5,-289.5c4,-6.7,10,-10,18,-10z
+M1001 80H400000v40H1013z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.574179em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p>即同一连通块内的所有点 与其余所有点的 几何距离之和；</p>
+<p>再通过搭配使用vector（而不是queue）的bfs实现当前连通块所有坐标点的存储。</p>
+<h2 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-type">const</span> ll M=<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>,N=<span class="hljs-number">502</span>;<br><span class="hljs-type">int</span> a[<span class="hljs-number">102</span>][<span class="hljs-number">102</span>],w,h,di[]=&#123;<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">-1</span>&#125;,dj[]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">1</span>&#125;;<br><span class="hljs-type">double</span> alp[<span class="hljs-number">27</span>]=&#123;<span class="hljs-number">0</span>&#125;;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">bfs</span><span class="hljs-params">(pair&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt; x)</span></span><br><span class="hljs-function"></span>&#123;<br>    vector&lt;pair&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt; &gt;vec;<span class="hljs-comment">//存储所有点</span><br>    vec.<span class="hljs-built_in">push_back</span>(x);<br>    a[x.first][x.second]=<span class="hljs-string">&#x27;0&#x27;</span>;<span class="hljs-comment">//加入后打标记</span><br>    <span class="hljs-type">int</span> i=<span class="hljs-number">0</span>,j;<span class="hljs-comment">//i是标记目前遍历到vec的第几项的指针</span><br>    <span class="hljs-keyword">while</span>(i!=vec.<span class="hljs-built_in">size</span>())<br>    &#123;<br>        pair&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt; now;<br>        now=vec[i];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> k=<span class="hljs-number">0</span>;k&lt;<span class="hljs-number">8</span>;k++)<span class="hljs-comment">//8个方向</span><br>        &#123;<br>            <span class="hljs-type">int</span> ni=now.first+di[k],nj=now.second+dj[k];<br>            <span class="hljs-keyword">if</span>(ni&gt;=<span class="hljs-number">0</span>&amp;&amp;ni&lt;h&amp;&amp;nj&gt;=<span class="hljs-number">0</span>&amp;&amp;nj&lt;w&amp;&amp;a[ni][nj]-<span class="hljs-string">&#x27;0&#x27;</span>==<span class="hljs-number">1</span>)<span class="hljs-comment">//合法且可行</span><br>                vec.<span class="hljs-built_in">push_back</span>(&#123;ni,nj&#125;),a[ni][nj]=<span class="hljs-string">&#x27;0&#x27;</span>;<br>        &#125;<br>        i++;<br>    &#125;<br>    <span class="hljs-type">double</span> all=<span class="hljs-number">0</span>;<span class="hljs-comment">//all存储哈希值</span><br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;vec.<span class="hljs-built_in">size</span>();i++)<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;vec.<span class="hljs-built_in">size</span>();j++)<br>        all+=<span class="hljs-built_in">sqrt</span>((<span class="hljs-type">double</span>)(vec[i].first-vec[j].first)*(vec[i].first-vec[j].first)<br>            +(<span class="hljs-type">double</span>)(vec[i].second-vec[j].second)*(vec[i].second-vec[j].second));<br>    all+=<span class="hljs-number">13</span>;<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">    如果这里没有+=13，若哈希值为0，匹配后，后序连通块则无法区分该字母是新字母还是已匹配的字母；</span><br><span class="hljs-comment">    理论上+=1也可以，仅作为与0的区别</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-comment">//printf(&quot;%lf\n&quot;,all);</span><br>    <span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;<span class="hljs-number">26</span>;j++)<span class="hljs-comment">//寻找匹配的字母，如果没有，返回的即是下一个空字母</span><br>    &#123;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">fabs</span>(alp[j]<span class="hljs-number">-0</span>)&lt;=<span class="hljs-number">0.00001</span>)<span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-built_in">fabs</span>(alp[j]-all)&lt;=<span class="hljs-number">0.00001</span>)<span class="hljs-keyword">break</span>;<br>    &#125;<br>    alp[j]=all;<span class="hljs-comment">//把字母标记上哈希值</span><br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;vec.<span class="hljs-built_in">size</span>();i++)a[vec[i].first][vec[i].second]=<span class="hljs-string">&#x27;a&#x27;</span>+j;<span class="hljs-comment">//刷字符串</span><br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    cin&gt;&gt;w&gt;&gt;h;<br>    <span class="hljs-type">int</span> i,j;<br>    string g;<br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;h;i++)<br>    &#123;<br>        cin&gt;&gt;g;<br>        <span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;w;j++)a[i][j]=g[j];<br>    &#125;<br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;h;i++)<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;w;j++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(a[i][j]-<span class="hljs-string">&#x27;0&#x27;</span>==<span class="hljs-number">1</span>)<br>        &#123;<br>            <span class="hljs-built_in">bfs</span>(&#123;i,j&#125;);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;h;i++)<span class="hljs-keyword">for</span>(j=<span class="hljs-number">0</span>;j&lt;w;j++)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c%s&quot;</span>,a[i][j],(j==w<span class="hljs-number">-1</span>)?<span class="hljs-string">&quot;\n&quot;</span>:<span class="hljs-string">&quot;\0&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="ed"><a class="markdownIt-Anchor" href="#ed"></a> ED</h2>
+<p>\</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" class="category-chain-item">算法竞赛</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/%E5%9B%BE%E4%B8%8E%E6%A0%91/" class="category-chain-item">图与树</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>关于 星空之夜 一题的思路+代码（连通块判重）</div>
+      <div>https://tanyuu.github.io/2021/04/06/2021.01-06/关于 星空之夜 一题的思路+代码（连通块判重）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>F Juny</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年4月6日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/07/2021.01-06/%E5%85%B3%E4%BA%8E%20%E5%8E%8B%E7%BC%A9%E7%BC%96%E7%A0%81%20%E4%B8%80%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF+%E8%A7%A3%E6%B3%95%EF%BC%88%E5%8C%BA%E9%97%B4DP%EF%BC%89/" title="关于 压缩编码 一题的思路+解法（区间DP）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">关于 压缩编码 一题的思路+解法（区间DP）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/01/2021.01-06/%E5%85%B3%E4%BA%8E%20%E7%89%9B%E5%BC%82%E6%88%96%20%E4%B8%80%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF+%E4%BB%A3%E7%A0%81%EF%BC%8801%E5%AD%97%E5%85%B8%E6%A0%91%E7%9A%84%E6%9E%84%E5%BB%BA%E4%B8%8E%E6%9F%A5%E8%AF%A2%EF%BC%89/" title="关于 牛异或 一题的思路+代码（01字典树的构建与查询）">
+                        <span class="hidden-mobile">关于 牛异或 一题的思路+代码（01字典树的构建与查询）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
