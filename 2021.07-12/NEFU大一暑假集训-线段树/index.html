@@ -1,0 +1,754 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/assets/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="rgb(45,86,141)">
+  <meta name="author" content="F Juny">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="题集链接  OP A Lowbit *  思路 代码   B Ezzat and Grid *  思路 代码   C 奇数国 *  思路 代码   D 敌兵布阵 *  思路 代码   E I Hate It *  思路 代码   F Transformation *  思路      OP 感谢学长的讲解与付出； 感谢ph和zsl两位大佬的指导与讨论； 夹带私货： 此节课的代表性的内容已经整理到自">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NEFU大一暑假集训-线段树">
+<meta property="og:url" content="https://tanyuu.github.io/2021.07-12/NEFU%E5%A4%A7%E4%B8%80%E6%9A%91%E5%81%87%E9%9B%86%E8%AE%AD-%E7%BA%BF%E6%AE%B5%E6%A0%91/index.html">
+<meta property="og:site_name" content="Yu_Tang">
+<meta property="og:description" content="题集链接  OP A Lowbit *  思路 代码   B Ezzat and Grid *  思路 代码   C 奇数国 *  思路 代码   D 敌兵布阵 *  思路 代码   E I Hate It *  思路 代码   F Transformation *  思路      OP 感谢学长的讲解与付出； 感谢ph和zsl两位大佬的指导与讨论； 夹带私货： 此节课的代表性的内容已经整理到自">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-28T15:33:06.000Z">
+<meta property="article:modified_time" content="2022-08-02T02:20:50.738Z">
+<meta property="article:author" content="Fu Junyuan">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>NEFU大一暑假集训-线段树 - Yu_Tang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.15.6/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tanyuu.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>煜·塘</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/img/wide_home.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="NEFU大一暑假集训-线段树"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-08-28 23:33" pubdate>
+          2021年8月28日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          20k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          171 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">NEFU大一暑假集训-线段树</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><a target="_blank" rel="noopener" href="https://vjudge.net/contest/454316#overview">题集链接</a><br />
+<ul class="markdownIt-TOC">
+<li><a href="#op">OP</a></li>
+<li><a href="#a-lowbit">A Lowbit</a><br />
+*
+<ul>
+<li><a href="#%E6%80%9D%E8%B7%AF">思路</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81">代码</a></li>
+</ul>
+</li>
+<li><a href="#b-ezzat-and-grid">B Ezzat and Grid</a><br />
+*
+<ul>
+<li><a href="#%E6%80%9D%E8%B7%AF-2">思路</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81-2">代码</a></li>
+</ul>
+</li>
+<li><a href="#c-%E5%A5%87%E6%95%B0%E5%9B%BD">C 奇数国</a><br />
+*
+<ul>
+<li><a href="#%E6%80%9D%E8%B7%AF-3">思路</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81-3">代码</a></li>
+</ul>
+</li>
+<li><a href="#d-%E6%95%8C%E5%85%B5%E5%B8%83%E9%98%B5">D 敌兵布阵</a><br />
+*
+<ul>
+<li><a href="#%E6%80%9D%E8%B7%AF-4">思路</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81-4">代码</a></li>
+</ul>
+</li>
+<li><a href="#e-i-hate-it">E I Hate It</a><br />
+*
+<ul>
+<li><a href="#%E6%80%9D%E8%B7%AF-5">思路</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81-5">代码</a></li>
+</ul>
+</li>
+<li><a href="#f-transformation">F Transformation</a><br />
+*
+<ul>
+<li><a href="#%E6%80%9D%E8%B7%AF-6">思路</a></li>
+</ul>
+</li>
+</ul>
+</p>
+<h2 id="op"><a class="markdownIt-Anchor" href="#op"></a> OP</h2>
+<p>感谢学长的讲解与付出；</p>
+<p>感谢ph和zsl两位大佬的指导与讨论；</p>
+<p>夹带私货：<br />
+此节课的代表性的内容已经整理到自己的贴子中：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Tan_Yuu/article/details/117451839">【笔记】数据结构</a></p>
+<p>线段树本身相对抽象，一些题又有懒标记的要求，实在不太好理解；<br />
+从应用来讲，线段树可以快速地进行区间修改与区间查询，但是所需空间复杂度比较大，有时需要离散化处理；</p>
+<h2 id="a-lowbit"><a class="markdownIt-Anchor" href="#a-lowbit"></a> A Lowbit</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/acm_durante/article/details/117963867">参考</a></p>
+<h4 id="思路"><a class="markdownIt-Anchor" href="#思路"></a> 思路</h4>
+<p>朴素来讲，我们会在进行区间更改时递归到所有叶节点进行lowbit更改，但是这种做法会被卡T；</p>
+<p>我们可以发现，若某叶节点元素 a 满足<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mi>b</mi><mi>i</mi><mi>t</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">lowbit(a)=a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">b</span><span class="mord mathdefault">i</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>，则<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>+</mo><mi>l</mi><mi>o</mi><mi>w</mi><mi>b</mi><mi>i</mi><mi>t</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mn>2</mn><mi>a</mi></mrow><annotation encoding="application/x-tex">a+lowbit(a)=2a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">b</span><span class="mord mathdefault">i</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault">a</span></span></span></span>，并且<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mi>b</mi><mi>i</mi><mi>t</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">lowbit(a)=a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">b</span><span class="mord mathdefault">i</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>的性质不会改变；<br />
+除此之外，若某节点 s 下所有叶节点元素 a 均满足<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mi>b</mi><mi>i</mi><mi>t</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">lowbit(a)=a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">b</span><span class="mord mathdefault">i</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>，则对 s 区间进行操作后，等价与<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>s</mi></mrow><annotation encoding="application/x-tex">2s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault">s</span></span></span></span>，并且<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mi>b</mi><mi>i</mi><mi>t</mi><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">lowbit(a)=a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">b</span><span class="mord mathdefault">i</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>的性质也不会改变；</p>
+<p>我们可以用此性质，懒标记存储此节点有多少次二倍操作未下传，就可以一定程度上降低时间复杂度；</p>
+<h4 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> INF = <span class="hljs-number">0x3f3f3f3f</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1e5</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> M = <span class="hljs-number">998244353</span>;<br><span class="hljs-keyword">struct</span><br>&#123;<br>    <span class="hljs-type">int</span> l, r, is; <span class="hljs-comment">//l,r为节点的左右界</span><br>    ll sum, lt;   <span class="hljs-comment">//sum为节点值，lt为懒标记</span><br>&#125; segt[N &lt;&lt; <span class="hljs-number">2</span> | <span class="hljs-number">1</span>];<br><span class="hljs-function">ll <span class="hljs-title">qm</span><span class="hljs-params">(ll a,ll b)</span><span class="hljs-comment">//qm即quick_mod</span></span><br><span class="hljs-function"></span>&#123;<br>	ll ans=<span class="hljs-number">1</span>%M;<span class="hljs-comment">//特殊处理M=1这一特殊情况</span><br>	<span class="hljs-keyword">for</span>(;b;b&gt;&gt;=<span class="hljs-number">1</span>)<br>	&#123;<br>		<span class="hljs-keyword">if</span>(b&amp;<span class="hljs-number">1</span>)ans=a*ans%M;<span class="hljs-comment">//如果b此位为1</span><br>		a=a*a%M;<br>	&#125;<br>	<span class="hljs-keyword">return</span> ans;<br>&#125;<br><span class="hljs-function">ll <span class="hljs-title">lowbit</span><span class="hljs-params">(ll x)</span> </span>&#123; <span class="hljs-keyword">return</span> x &amp; -x; &#125;<br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">check</span><span class="hljs-params">(ll x)</span> </span>&#123; <span class="hljs-keyword">return</span> !(x - <span class="hljs-built_in">lowbit</span>(x)); &#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pushdown</span><span class="hljs-params">(<span class="hljs-type">int</span> p)</span> <span class="hljs-comment">//对懒标记进行下传</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (segt[p].lt)<br>    &#123;<br>        segt[p &lt;&lt; <span class="hljs-number">1</span>].sum=segt[p &lt;&lt; <span class="hljs-number">1</span>].sum*<span class="hljs-built_in">qm</span>(<span class="hljs-number">2</span>,segt[p].lt)%M;<br>        segt[p &lt;&lt; <span class="hljs-number">1</span>|<span class="hljs-number">1</span>].sum=segt[p &lt;&lt; <span class="hljs-number">1</span>|<span class="hljs-number">1</span>].sum*<span class="hljs-built_in">qm</span>(<span class="hljs-number">2</span>,segt[p].lt)%M;<br>        segt[p &lt;&lt; <span class="hljs-number">1</span>].lt+=segt[p].lt;<br>        segt[p &lt;&lt; <span class="hljs-number">1</span>|<span class="hljs-number">1</span>].lt+=segt[p].lt;<br>        segt[p].lt = <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    segt[p].l = cl, segt[p].r = cr, segt[p].lt = <span class="hljs-number">0</span>, segt[p].sum = <span class="hljs-number">0</span>, segt[p].is = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span> (cl == cr)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;segt[p].sum);<br>        segt[p].is = <span class="hljs-built_in">check</span>(segt[p].sum);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> mid = cl + cr &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, mid);<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, cr);<br>    segt[p].sum = segt[p &lt;&lt; <span class="hljs-number">1</span>].sum + segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum;<br>    segt[p].is = segt[p&lt;&lt;<span class="hljs-number">1</span>].is&amp;&amp;segt[p&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>].is;<br>    <span class="hljs-keyword">if</span> (segt[p].is)<br>        segt[p].sum %= M;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">icg</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (cl &lt;= segt[p].l &amp;&amp; segt[p].r &lt;= cr &amp;&amp; segt[p].is)<br>    &#123;<br>        segt[p].sum &lt;&lt;= <span class="hljs-number">1</span>;<br>        segt[p].lt++;<br>        segt[p].sum %= M;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (segt[p].l == segt[p].r)<br>    &#123;<br>        segt[p].sum += <span class="hljs-built_in">lowbit</span>(segt[p].sum);<br>        segt[p].is = <span class="hljs-built_in">check</span>(segt[p].sum);<br>        <span class="hljs-keyword">if</span> (segt[p].is)<br>            segt[p].sum %= M;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-built_in">pushdown</span>(p);<br>    <span class="hljs-type">int</span> mid = segt[p].r + segt[p].l &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (cl &lt;= mid)<br>        <span class="hljs-built_in">icg</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, cr);<br>    <span class="hljs-keyword">if</span> (cr &gt;= mid + <span class="hljs-number">1</span>)<br>        <span class="hljs-built_in">icg</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, cl, cr);<br>    segt[p].sum = segt[p &lt;&lt; <span class="hljs-number">1</span>].sum + segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum;<br>    segt[p].is = segt[p&lt;&lt;<span class="hljs-number">1</span>].is&amp;&amp;segt[p&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>].is;<br>    segt[p].sum %= M;<br>&#125;<br><span class="hljs-function">ll <span class="hljs-title">ick</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (cl &lt;= segt[p].l &amp;&amp; segt[p].r &lt;= cr)<br>        <span class="hljs-keyword">return</span> segt[p].sum;<br>    <span class="hljs-built_in">pushdown</span>(p);<br>    <span class="hljs-type">int</span> mid = segt[p].r + segt[p].l &gt;&gt; <span class="hljs-number">1</span>;<br>    ll val = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span> (cl &lt;= mid)<br>        val += <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, cr), val %= M;<br>    <span class="hljs-keyword">if</span> (cr &gt;= mid + <span class="hljs-number">1</span>)<br>        val += <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, cl, cr), val %= M;<br>    <span class="hljs-keyword">return</span> val;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> n, t, q, l, r, o;<br>    cin &gt;&gt; t;<br>    <span class="hljs-keyword">while</span> (t--)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);<br>        <span class="hljs-built_in">build</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, n);<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;q);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>        &#123;<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d&quot;</span>, &amp;o, &amp;l, &amp;r);<br>            <span class="hljs-keyword">if</span> (o == <span class="hljs-number">1</span>)<br>            &#123;<br>                <span class="hljs-built_in">icg</span>(<span class="hljs-number">1</span>, l, r);<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (o == <span class="hljs-number">2</span>)<br>            &#123;<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, <span class="hljs-built_in">ick</span>(<span class="hljs-number">1</span>, l, r));<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="b-ezzat-and-grid"><a class="markdownIt-Anchor" href="#b-ezzat-and-grid"></a> B Ezzat and Grid</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Stevenwuxu/article/details/119611897">参考</a><br />
+线段树+dp</p>
+<h4 id="思路-2"><a class="markdownIt-Anchor" href="#思路-2"></a> 思路</h4>
+<p>首先左右界的数据范围过大，需要离散化处理；</p>
+<p>定义dp函数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">dp[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span>为以第i行为末尾的最长可行序列长度，在线段树内存储结点下前i-1行该节点内的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">dp[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span>最大值；<br />
+对于某一行的若干的区间，假设有区间内的可行序列长度最大值为a，则有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo><mo>=</mo><mi>a</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">dp[i]=a+1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>；<br />
+同时持续更新答案的最大值（即<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">dp[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span>）即可；</p>
+<p>但是此题要求输出应被删掉的点，就需要在维护线段树时同时记录该最大值对应的行号，在进行<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>p</mi><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">dp[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">p</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span>的修改时同时标记<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mi>a</mi><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">fa[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">a</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span>即可；<br />
+再通过上溯找到没有在这个序列中的点即可；</p>
+<h4 id="代码-2"><a class="markdownIt-Anchor" href="#代码-2"></a> 代码</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> INF = <span class="hljs-number">0x3f3f3f3f</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">6e5</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> M = <span class="hljs-number">998244353</span>;<br><span class="hljs-keyword">struct</span><br>&#123;<br>    <span class="hljs-type">int</span> l, r; <span class="hljs-comment">//l,r为节点的左右界</span><br>    ll lt;    <span class="hljs-comment">//sum为节点值，lt为懒标记</span><br>    pair&lt;ll, <span class="hljs-type">int</span>&gt; sum;<br>&#125; segt[N &lt;&lt; <span class="hljs-number">2</span> | <span class="hljs-number">1</span>];<br>map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; mp;<br><span class="hljs-type">int</span> c = <span class="hljs-number">0</span>, ch = <span class="hljs-number">1</span>, gh[<span class="hljs-number">600005</span>];<br><span class="hljs-type">int</span> dp[<span class="hljs-number">300005</span>], fa[<span class="hljs-number">300005</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pushdown</span><span class="hljs-params">(<span class="hljs-type">int</span> p)</span> <span class="hljs-comment">//对懒标记进行下传</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (segt[p].lt)<br>    &#123;<br>        segt[p &lt;&lt; <span class="hljs-number">1</span>].sum = segt[p].sum;<br>        segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum = segt[p].sum;<br>        segt[p &lt;&lt; <span class="hljs-number">1</span>].lt = segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].lt = <span class="hljs-number">1</span>;<br>        segt[p].lt = <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    segt[p].l = cl, segt[p].r = cr, segt[p].lt = <span class="hljs-number">0</span>, segt[p].sum = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-keyword">if</span> (cl == cr)<br>    &#123;<br>        <span class="hljs-comment">//scanf(&quot;%lld&quot;, &amp;segt[p].sum);</span><br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> mid = cl + cr &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, mid);<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, cr);<br>    segt[p].sum = <span class="hljs-built_in">max</span>(segt[p &lt;&lt; <span class="hljs-number">1</span>].sum, segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">icg</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr, pair&lt;ll, <span class="hljs-type">int</span>&gt; d)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (cl &lt;= segt[p].l &amp;&amp; segt[p].r &lt;= cr)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (d &gt;= segt[p].sum)<br>            segt[p].sum = d, segt[p].lt = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-built_in">pushdown</span>(p);<br>    <span class="hljs-type">int</span> mid = segt[p].r + segt[p].l &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (cl &lt;= mid)<br>        <span class="hljs-built_in">icg</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, cr, d);<br>    <span class="hljs-keyword">if</span> (cr &gt;= mid + <span class="hljs-number">1</span>)<br>        <span class="hljs-built_in">icg</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, cl, cr, d);<br>    segt[p].sum = <span class="hljs-built_in">max</span>(segt[p &lt;&lt; <span class="hljs-number">1</span>].sum, segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum);<br>&#125;<br><span class="hljs-function">pair&lt;ll, <span class="hljs-type">int</span>&gt; <span class="hljs-title">ick</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (cl &lt;= segt[p].l &amp;&amp; segt[p].r &lt;= cr)<br>        <span class="hljs-keyword">return</span> segt[p].sum;<br>    <span class="hljs-built_in">pushdown</span>(p);<br>    <span class="hljs-type">int</span> mid = segt[p].r + segt[p].l &gt;&gt; <span class="hljs-number">1</span>;<br>    pair&lt;ll, <span class="hljs-type">int</span>&gt; val = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-keyword">if</span> (cl &lt;= mid)<br>        val = <span class="hljs-built_in">max</span>(val, <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, cr));<br>    <span class="hljs-keyword">if</span> (cr &gt;= mid + <span class="hljs-number">1</span>)<br>        val = <span class="hljs-built_in">max</span>(val, <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, cl, cr));<br>    <span class="hljs-keyword">return</span> val;<br>&#125;<br>pair&lt;<span class="hljs-type">int</span>, pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;&gt; opt;<br>vector&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;&gt; iq[<span class="hljs-number">300005</span>];<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> n, m;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i++)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d&quot;</span>, &amp;opt.first, &amp;opt.second.first, &amp;opt.second.second);<br>        gh[c++] = opt.second.first;<br>        gh[c++] = opt.second.second;<br>        iq[opt.first].<span class="hljs-built_in">push_back</span>(opt.second);<br>    &#125;<br>    <span class="hljs-built_in">sort</span>(gh, gh + c);<br>    mp[gh[<span class="hljs-number">0</span>]] = ch++;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; c; i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (gh[i] == gh[i - <span class="hljs-number">1</span>])<br>            <span class="hljs-keyword">continue</span>;<br>        mp[gh[i]] = ch++;<br>    &#125;<br>    <span class="hljs-built_in">build</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, ch);<br>    <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>, tail = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>    &#123;<br><br>        pair&lt;ll, <span class="hljs-type">int</span>&gt; mx = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125;;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; iq[i].<span class="hljs-built_in">size</span>(); j++)<br>        &#123;<br>            pair&lt;ll, <span class="hljs-type">int</span>&gt; g = <span class="hljs-built_in">ick</span>(<span class="hljs-number">1</span>, mp[iq[i][j].first], mp[iq[i][j].second]);<br>            <span class="hljs-keyword">if</span> (g &gt; mx)<br>                mx = g;<br>        &#125;<br>        dp[i] = mx.first + <span class="hljs-number">1</span>;<br>        fa[i] = mx.second;<br>        <span class="hljs-keyword">if</span> (dp[i] &gt; ans)<br>        &#123;<br>            ans = dp[i];<br>            tail = i;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; iq[i].<span class="hljs-built_in">size</span>(); j++)<br>        &#123;<br>            <span class="hljs-built_in">icg</span>(<span class="hljs-number">1</span>, mp[iq[i][j].first], mp[iq[i][j].second], &#123;dp[i], i&#125;);<br>        &#125;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>, n - ans);<br>    <span class="hljs-keyword">if</span> (ans != n)<br>    &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>        <span class="hljs-type">int</span> now = tail, p = n;<br>        <span class="hljs-keyword">while</span> (p != now)<br>            &#123;<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, p--);<br>            &#125;<br>        <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>)<br>        &#123;<br>            p--;<br>            now = fa[now];<br>            <span class="hljs-keyword">while</span> (p != now)<br>            &#123;<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, p--);<br>            &#125;<br>            <span class="hljs-keyword">if</span>(!now)<span class="hljs-keyword">break</span>;<br>        &#125;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="c-奇数国"><a class="markdownIt-Anchor" href="#c-奇数国"></a> C 奇数国</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33785972/article/details/93396185">参考</a></p>
+<h4 id="思路-3"><a class="markdownIt-Anchor" href="#思路-3"></a> 思路</h4>
+<p>朴素来讲，我们可以在维护乘积线段树的同时，用一个桶数组维护结点的乘积值内有什么质数，有<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>t</mi><mo stretchy="false">[</mo><mi>p</mi><mo stretchy="false">]</mo><mi mathvariant="normal">.</mi><mi>p</mi><mi>r</mi><mi>i</mi><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo><mo>=</mo><mi>s</mi><mi>t</mi><mo stretchy="false">[</mo><mi>p</mi><mo>&lt;</mo><mo>&lt;</mo><mn>1</mn><mo stretchy="false">]</mo><mi mathvariant="normal">.</mi><mi>p</mi><mi>r</mi><mi>i</mi><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo><mtext> </mtext><mi mathvariant="normal">∣</mi><mtext> </mtext><mi>s</mi><mi>t</mi><mo stretchy="false">[</mo><mi>p</mi><mo>&lt;</mo><mo>&lt;</mo><mn>1</mn><mi mathvariant="normal">∣</mi><mn>1</mn><mo stretchy="false">]</mo><mi mathvariant="normal">.</mi><mi>p</mi><mi>r</mi><mi>i</mi><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">st[p].pri[i]=st[p&lt;&lt;1].pri[i]\ |\ st[p&lt;&lt;1|1].pri[i]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">p</span><span class="mclose">]</span><span class="mord">.</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">i</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mord">.</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">i</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mspace"> </span><span class="mord">∣</span><span class="mspace"> </span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">∣</span><span class="mord">1</span><span class="mclose">]</span><span class="mord">.</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">i</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span></span></span></span>；</p>
+<p>但是如此存储的话，时间即为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>60</mn><mi>n</mi><mo separator="true">⋅</mo><mi>log</mi><mo>⁡</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">60n\cdotp \log n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord">6</span><span class="mord">0</span><span class="mord mathdefault">n</span><span class="mpunct">⋅</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span></span></span></span>，约为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>7</mn><mi>e</mi><mn>7</mn></mrow><annotation encoding="application/x-tex">7e7</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">7</span><span class="mord mathdefault">e</span><span class="mord">7</span></span></span></span>，比较悬；</p>
+<p>但是仔细观察，60个质数的存在性不必用数组维护，还可以用long long内的数位维护，用<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mo stretchy="false">(</mo><mi>s</mi><mi>t</mi><mo stretchy="false">[</mo><mi>p</mi><mo stretchy="false">]</mo><mi mathvariant="normal">.</mi><mi>p</mi><mi>r</mi><mi>i</mi><mo>&gt;</mo><mo>&gt;</mo><mi>i</mi><mo stretchy="false">)</mo><mi mathvariant="normal">&amp;</mi><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[(st[p].pri&gt;&gt;i)\&amp;1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mopen">(</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">p</span><span class="mclose">]</span><span class="mord">.</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">i</span><span class="mclose">)</span><span class="mord">&amp;</span><span class="mord">1</span><span class="mclose">]</span></span></span></span>表示p结点下是否有质数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>p</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">p_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，更新时变成了<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>t</mi><mo stretchy="false">[</mo><mi>p</mi><mo stretchy="false">]</mo><mi mathvariant="normal">.</mi><mi>p</mi><mi>r</mi><mi>i</mi><mo>=</mo><mi>s</mi><mi>t</mi><mo stretchy="false">[</mo><mi>p</mi><mo>&lt;</mo><mo>&lt;</mo><mn>1</mn><mo stretchy="false">]</mo><mi mathvariant="normal">.</mi><mi>p</mi><mi>r</mi><mi>i</mi><mtext> </mtext><mi mathvariant="normal">∣</mi><mtext> </mtext><mi>s</mi><mi>t</mi><mo stretchy="false">[</mo><mi>p</mi><mo>&lt;</mo><mo>&lt;</mo><mn>1</mn><mi mathvariant="normal">∣</mi><mn>1</mn><mo stretchy="false">]</mo><mi mathvariant="normal">.</mi><mi>p</mi><mi>r</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">st[p].pri=st[p&lt;&lt;1].pri\ |\ st[p&lt;&lt;1|1].pri</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">p</span><span class="mclose">]</span><span class="mord">.</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mord">.</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">i</span><span class="mspace"> </span><span class="mord">∣</span><span class="mspace"> </span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen">[</span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">∣</span><span class="mord">1</span><span class="mclose">]</span><span class="mord">.</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">i</span></span></span></span>，时间复杂度降低啦；</p>
+<p>最后结合快速幂和逆元进行欧拉函数值的求取即可；</p>
+<h4 id="代码-3"><a class="markdownIt-Anchor" href="#代码-3"></a> 代码</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> ll M = <span class="hljs-number">19961993</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1e5</span>;<br><span class="hljs-keyword">struct</span><br>&#123;<br>    <span class="hljs-type">int</span> l, r;     <span class="hljs-comment">//l,r为节点的左右界</span><br>    ll sum, ppos; <span class="hljs-comment">//sum为节点值</span><br>&#125; segt[N &lt;&lt; <span class="hljs-number">2</span> | <span class="hljs-number">1</span>];<br><span class="hljs-type">int</span> pri[<span class="hljs-number">62</span>] = &#123;<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">11</span>, <span class="hljs-number">13</span>, <span class="hljs-number">17</span>, <span class="hljs-number">19</span>, <span class="hljs-number">23</span>, <span class="hljs-number">29</span>, <span class="hljs-number">31</span>, <span class="hljs-number">37</span>,<br>               <span class="hljs-number">41</span>, <span class="hljs-number">43</span>, <span class="hljs-number">47</span>, <span class="hljs-number">53</span>, <span class="hljs-number">59</span>, <span class="hljs-number">61</span>, <span class="hljs-number">67</span>, <span class="hljs-number">71</span>, <span class="hljs-number">73</span>, <span class="hljs-number">79</span>, <span class="hljs-number">83</span>, <span class="hljs-number">89</span>, <span class="hljs-number">97</span>,<br>               <span class="hljs-number">101</span>, <span class="hljs-number">103</span>, <span class="hljs-number">107</span>, <span class="hljs-number">109</span>, <span class="hljs-number">113</span>, <span class="hljs-number">127</span>, <span class="hljs-number">131</span>, <span class="hljs-number">137</span>, <span class="hljs-number">139</span>, <span class="hljs-number">149</span>,<br>               <span class="hljs-number">151</span>, <span class="hljs-number">157</span>, <span class="hljs-number">163</span>, <span class="hljs-number">167</span>, <span class="hljs-number">173</span>, <span class="hljs-number">179</span>, <span class="hljs-number">181</span>, <span class="hljs-number">191</span>, <span class="hljs-number">193</span>, <span class="hljs-number">197</span>, <span class="hljs-number">199</span>,<br>               <span class="hljs-number">211</span>, <span class="hljs-number">223</span>, <span class="hljs-number">227</span>, <span class="hljs-number">229</span>, <span class="hljs-number">233</span>, <span class="hljs-number">239</span>, <span class="hljs-number">241</span>, <span class="hljs-number">251</span>, <span class="hljs-number">257</span>, <span class="hljs-number">263</span>, <span class="hljs-number">269</span>, <span class="hljs-number">271</span>, <span class="hljs-number">277</span>, <span class="hljs-number">281</span>&#125;;<br><br><span class="hljs-function">ll <span class="hljs-title">qm</span><span class="hljs-params">(ll a, ll b)</span></span><br><span class="hljs-function"></span>&#123;<br>    ll ans = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span> (; b; b &gt;&gt;= <span class="hljs-number">1</span>)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (b &amp; <span class="hljs-number">1</span>)<br>            ans = ans * a % M;<br>        a = a * a % M;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ans;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    segt[p].l = cl, segt[p].r = cr, segt[p].ppos = <span class="hljs-number">2</span>, segt[p].sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span> (cl == cr)<br>    &#123;<br>        segt[p].sum = <span class="hljs-number">3</span>;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> mid = cl + cr &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, mid);<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, cr);<br>    segt[p].sum = (segt[p &lt;&lt; <span class="hljs-number">1</span>].sum * segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum) % M;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pcg</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> x, ll v, ll pnow)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (segt[p].l == segt[p].r)<br>    &#123;<br>        segt[p].sum = v;<br>        segt[p].ppos = pnow;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> mid = segt[p].l + segt[p].r &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (x &lt;= mid)<br>        <span class="hljs-built_in">pcg</span>(p &lt;&lt; <span class="hljs-number">1</span>, x, v, pnow);<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-built_in">pcg</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, x, v, pnow);<br>    segt[p].sum = (segt[p &lt;&lt; <span class="hljs-number">1</span>].sum * segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum) % M;<br>    segt[p].ppos = segt[p &lt;&lt; <span class="hljs-number">1</span>].ppos | segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].ppos;<br>&#125;<br><span class="hljs-function">pair&lt;ll, ll&gt; <span class="hljs-title">ick</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (cl &lt;= segt[p].l &amp;&amp; segt[p].r &lt;= cr)<br>        <span class="hljs-keyword">return</span> &#123;segt[p].sum, segt[p].ppos&#125;;<br>    <span class="hljs-type">int</span> mid = segt[p].r + segt[p].l &gt;&gt; <span class="hljs-number">1</span>;<br>    pair&lt;ll, ll&gt; val = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;, tmp = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-keyword">if</span> (cl &lt;= mid)<br>    &#123;<br>        tmp = <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, cr);<br>        val.first = val.first*tmp.first%M;<br>        val.second |= tmp.second;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (cr &gt;= mid + <span class="hljs-number">1</span>)<br>    &#123;<br>        tmp = <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, cl, cr);<br>        val.first = val.first*tmp.first%M;<br>        val.second |= tmp.second;<br>    &#125;<br>    val.first%=M;<br>    <span class="hljs-keyword">return</span> val;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> n = <span class="hljs-number">100000</span>, m;<br>    ll a, b, c;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;m);<br>    <span class="hljs-built_in">build</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,n);<br>    <span class="hljs-keyword">while</span> (m--)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld%lld%lld&quot;</span>,&amp;a,&amp;b,&amp;c);<br>        <span class="hljs-keyword">if</span>(!a)<br>        &#123;<br>            pair&lt;ll, ll&gt;tmp=<span class="hljs-built_in">ick</span>(<span class="hljs-number">1</span>,b,c);<br>            ll ans=tmp.first;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">60</span>;i++)<br>            &#123;<br>                <span class="hljs-keyword">if</span>((tmp.second&gt;&gt;i)&amp;<span class="hljs-number">1ll</span>)<br>                &#123;<br>                    ans=(ans-(ans*<span class="hljs-built_in">qm</span>(pri[i],M<span class="hljs-number">-2</span>))%M+M)%M;<br>                &#125;<br>            &#125;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,ans);<br>        &#125;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>            ll pnow=<span class="hljs-number">0</span>;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">60</span>;i++)<br>            &#123;<br>                <span class="hljs-keyword">if</span>(c%pri[i]==<span class="hljs-number">0</span>)pnow|=(<span class="hljs-number">1ll</span>&lt;&lt;i);<br>            &#125;<br>            <span class="hljs-built_in">pcg</span>(<span class="hljs-number">1</span>,b,c,pnow);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="d-敌兵布阵"><a class="markdownIt-Anchor" href="#d-敌兵布阵"></a> D 敌兵布阵</h2>
+<h4 id="思路-4"><a class="markdownIt-Anchor" href="#思路-4"></a> 思路</h4>
+<p>板~</p>
+<p>单点修改，区间查询</p>
+<h4 id="代码-4"><a class="markdownIt-Anchor" href="#代码-4"></a> 代码</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> INF=<span class="hljs-number">0x3f3f3f3f</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1e5</span> + <span class="hljs-number">5</span>;<br><span class="hljs-keyword">struct</span><br>&#123;<br>    <span class="hljs-type">int</span> l, r;<span class="hljs-comment">//l,r为节点的左右界</span><br>    ll sum, lt;<span class="hljs-comment">//sum为节点值，lt为懒标记</span><br>&#125; segt[N &lt;&lt; <span class="hljs-number">2</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    segt[p].l = cl, segt[p].r = cr, segt[p].lt = <span class="hljs-number">0</span>, segt[p].sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span> (cl == cr)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>,&amp;segt[p].sum);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> mid = cl + cr &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, mid);<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, cr);<br>    segt[p].sum = segt[p &lt;&lt; <span class="hljs-number">1</span>].sum + segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pcg</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> x, ll v)</span><span class="hljs-comment">//不兼容懒标记</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (segt[p].l == segt[p].r)<br>    &#123;<br>        segt[p].sum += v;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> mid = segt[p].l + segt[p].r &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (x &lt;= mid)<br>        <span class="hljs-built_in">pcg</span>(p &lt;&lt; <span class="hljs-number">1</span>, x, v);<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-built_in">pcg</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, x, v);<br>    segt[p].sum = segt[p &lt;&lt; <span class="hljs-number">1</span>].sum + segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum;<br>&#125;<br><span class="hljs-function">ll <span class="hljs-title">ick</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (cl &lt;= segt[p].l &amp;&amp; segt[p].r &lt;= cr)<br>        <span class="hljs-keyword">return</span> segt[p].sum;<br>    <span class="hljs-type">int</span> mid = segt[p].r + segt[p].l &gt;&gt; <span class="hljs-number">1</span>;<br>    ll val = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span> (cl &lt;= mid)<br>        val += <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, cr);<br>    <span class="hljs-keyword">if</span> (cr &gt;= mid + <span class="hljs-number">1</span>)<br>        val += <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, cl, cr);<br>    <span class="hljs-keyword">return</span> val;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> t,n,a,b,c=<span class="hljs-number">1</span>;<br>    cin&gt;&gt;t;<br>    <span class="hljs-keyword">while</span>(t--)<br>    &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Case %d:\n&quot;</span>,c++);<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);<br>        <span class="hljs-built_in">build</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,n);<br>        string o;<br>        <span class="hljs-keyword">while</span>(cin&gt;&gt;o&amp;&amp;o!=<span class="hljs-string">&quot;End&quot;</span>)<br>        &#123;<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;a,&amp;b);<br>            <span class="hljs-keyword">if</span>(o==<span class="hljs-string">&quot;Query&quot;</span>)<br>            &#123;<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,<span class="hljs-built_in">ick</span>(<span class="hljs-number">1</span>,a,b));<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(o==<span class="hljs-string">&quot;Add&quot;</span>)<br>            &#123;<br>                <span class="hljs-built_in">pcg</span>(<span class="hljs-number">1</span>,a,b);<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(o==<span class="hljs-string">&quot;Sub&quot;</span>)<br>            &#123;<br>                <span class="hljs-built_in">pcg</span>(<span class="hljs-number">1</span>,a,-b);<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="e-i-hate-it"><a class="markdownIt-Anchor" href="#e-i-hate-it"></a> E I Hate It</h2>
+<h4 id="思路-5"><a class="markdownIt-Anchor" href="#思路-5"></a> 思路</h4>
+<p>板~</p>
+<p>单点修改，区间查询</p>
+<h4 id="代码-5"><a class="markdownIt-Anchor" href="#代码-5"></a> 代码</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> INF=<span class="hljs-number">0x3f3f3f3f</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">2e5</span>;<br><span class="hljs-keyword">struct</span><br>&#123;<br>    <span class="hljs-type">int</span> l, r;<span class="hljs-comment">//l,r为节点的左右界</span><br>    ll sum, lt;<span class="hljs-comment">//sum为节点值，lt为懒标记</span><br>&#125; segt[N &lt;&lt; <span class="hljs-number">2</span>|<span class="hljs-number">1</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    segt[p].l = cl, segt[p].r = cr, segt[p].lt = <span class="hljs-number">0</span>, segt[p].sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span> (cl == cr)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>,&amp;segt[p].sum);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> mid = cl + cr &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, mid);<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, cr);<br>    segt[p].sum = <span class="hljs-built_in">max</span>(segt[p &lt;&lt; <span class="hljs-number">1</span>].sum , segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pcg</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> x, ll v)</span><span class="hljs-comment">//不兼容懒标记</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (segt[p].l == segt[p].r)<br>    &#123;<br>        segt[p].sum = v;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> mid = segt[p].l + segt[p].r &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (x &lt;= mid)<br>        <span class="hljs-built_in">pcg</span>(p &lt;&lt; <span class="hljs-number">1</span>, x, v);<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-built_in">pcg</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, x, v);<br>    segt[p].sum =<span class="hljs-built_in">max</span>(segt[p &lt;&lt; <span class="hljs-number">1</span>].sum , segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum);<br>&#125;<br><span class="hljs-function">ll <span class="hljs-title">ick</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (cl &lt;= segt[p].l &amp;&amp; segt[p].r &lt;= cr)<br>        <span class="hljs-keyword">return</span> segt[p].sum;<br>    <span class="hljs-type">int</span> mid = segt[p].r + segt[p].l &gt;&gt; <span class="hljs-number">1</span>;<br>    ll val = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span> (cl &lt;= mid)<br>        val=<span class="hljs-built_in">max</span>(val, <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, cr));<br>    <span class="hljs-keyword">if</span> (cr &gt;= mid + <span class="hljs-number">1</span>)<br>        val=<span class="hljs-built_in">max</span>(val, <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, cl, cr));<br>    <span class="hljs-keyword">return</span> val;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> m,n,a,b;<br>    <span class="hljs-keyword">while</span>(~<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;n,&amp;m))<br>    &#123;<br>        <span class="hljs-built_in">build</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,n);<br>        <span class="hljs-type">char</span> o;<br>        <span class="hljs-keyword">while</span>(m--)<br>        &#123;<br>            cin&gt;&gt;o;<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;a,&amp;b);<br>            <span class="hljs-keyword">if</span>(o==<span class="hljs-string">&#x27;Q&#x27;</span>)<br>            &#123;<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,<span class="hljs-built_in">ick</span>(<span class="hljs-number">1</span>,a,b));<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(o==<span class="hljs-string">&#x27;U&#x27;</span>)<br>            &#123;<br>                <span class="hljs-built_in">pcg</span>(<span class="hljs-number">1</span>,a,b);<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="f-transformation"><a class="markdownIt-Anchor" href="#f-transformation"></a> F Transformation</h2>
+<h4 id="思路-6"><a class="markdownIt-Anchor" href="#思路-6"></a> 思路</h4>
+p\in\{1,2,3\}$$朴素来讲，我们可以使用三个懒标记和三个值维护未下传的区间加（ad），区间乘（mu），区间更改（cg）操作和区间下的元素和（sum1），元素平方和（sum2），区间立方和（sum3）；
+
+但是我们就面临一个问题，如果某位同时存在多种标记，如何判断它们的先后顺序？
+
+在查阅资料时发现，有人在更新时选择先把当前结点的其他标记下传，但是被卡t了；
+
+我们可以制定以下策略：
+1. 对某结点进行cg操作时，直接修改三个sum值，清空ad和mu标记；
+2. 对某结点进行mu操作时（假设区间乘d），维护三个sum值，对现有的ad标记乘d，mu标记也乘d；
+3. 对某节点进行ad操作时（假设区间加d），通过 完全平方公式 和 完全立方公式 维护三个num值，对现有ad标记加d；
+
+以此策略进行维护后，在下传懒标记时只需要以cg，mu，ad的顺序修改子节点就可以规避顺序问题；
+#### 代码
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> M = <span class="hljs-number">10007</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1e5</span>;<br><span class="hljs-keyword">struct</span><br>&#123;<br>    <span class="hljs-type">int</span> l, r;                        <span class="hljs-comment">//l,r为节点的左右界</span><br>    ll sum1, sum2, sum3, ad, mu, cg; <span class="hljs-comment">//sum为节点值</span><br>&#125; segt[N &lt;&lt; <span class="hljs-number">2</span> | <span class="hljs-number">1</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">cgcg</span><span class="hljs-params">(<span class="hljs-type">int</span> p, ll d)</span></span><br><span class="hljs-function"></span>&#123;<br>    segt[p].sum1 = d * (segt[p].r - segt[p].l + <span class="hljs-number">1</span>) % M;<br>    segt[p].sum2 = d * d * (segt[p].r - segt[p].l + <span class="hljs-number">1</span>) % M;<br>    segt[p].sum3 = d * d * d * (segt[p].r - segt[p].l + <span class="hljs-number">1</span>) % M;<br>    segt[p].cg = d;<br>    segt[p].ad = <span class="hljs-number">0</span>;<br>    segt[p].mu = <span class="hljs-number">1</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">cgmu</span><span class="hljs-params">(<span class="hljs-type">int</span> p, ll d)</span></span><br><span class="hljs-function"></span>&#123;<br>    segt[p].sum1 = segt[p].sum1 * d % M;<br>    segt[p].sum2 = segt[p].sum2 * d * d % M;<br>    segt[p].sum3 = segt[p].sum3 * d * d * d % M;<br>    segt[p].ad = segt[p].ad * d % M;<br>    segt[p].mu = segt[p].mu * d % M;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">cgad</span><span class="hljs-params">(<span class="hljs-type">int</span> p, ll d)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> lenp = segt[p].r - segt[p].l + <span class="hljs-number">1</span>;<br>    segt[p].sum3 = (segt[p].sum3 + lenp * d * d * d + <span class="hljs-number">3</span> * segt[p].sum1 * d * d + <span class="hljs-number">3</span> * segt[p].sum2 * d) % M;<br>    segt[p].sum2 = (segt[p].sum2 + lenp * d * d + <span class="hljs-number">2</span> * segt[p].sum1 * d) % M;<br>    segt[p].sum1 = (segt[p].sum1 + lenp * d) % M;<br>    segt[p].ad = (segt[p].ad + d) % M;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pushdown</span><span class="hljs-params">(<span class="hljs-type">int</span> p)</span> <span class="hljs-comment">//对懒标记进行下传</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (segt[p].cg)<br>    &#123;<br>        <span class="hljs-built_in">cgcg</span>(p &lt;&lt; <span class="hljs-number">1</span>, segt[p].cg);<br>        <span class="hljs-built_in">cgcg</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, segt[p].cg);<br>        segt[p].cg = <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (segt[p].mu != <span class="hljs-number">1</span>)<br>    &#123;<br>        <span class="hljs-built_in">cgmu</span>(p &lt;&lt; <span class="hljs-number">1</span>, segt[p].mu);<br>        <span class="hljs-built_in">cgmu</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, segt[p].mu);<br>        segt[p].mu = <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span> (segt[p].ad)<br>    &#123;<br>        <span class="hljs-built_in">cgad</span>(p &lt;&lt; <span class="hljs-number">1</span>, segt[p].ad);<br>        <span class="hljs-built_in">cgad</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, segt[p].ad);<br>        segt[p].ad = <span class="hljs-number">0</span>;<br>    &#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    segt[p].l = cl, segt[p].r = cr;<br>    segt[p].sum1 = <span class="hljs-number">0</span>, segt[p].sum2 = <span class="hljs-number">0</span>, segt[p].sum3 = <span class="hljs-number">0</span>;<br>    segt[p].ad = <span class="hljs-number">0</span>, segt[p].mu = <span class="hljs-number">1</span>, segt[p].cg = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span> (cl == cr)<br>    &#123;<br>        <span class="hljs-comment">//scanf(&quot;%lld&quot;, &amp;segt[p].sum);</span><br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> mid = cl + cr &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, mid);<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, cr);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">icg</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr, <span class="hljs-type">int</span> o, ll d)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (cl &lt;= segt[p].l &amp;&amp; segt[p].r &lt;= cr)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (o == <span class="hljs-number">1</span>)<br>        &#123;<br>            <span class="hljs-built_in">cgad</span>(p, d);<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (o == <span class="hljs-number">2</span>)<br>        &#123;<br>            <span class="hljs-built_in">cgmu</span>(p, d);<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (o == <span class="hljs-number">3</span>)<br>        &#123;<br>            <span class="hljs-built_in">cgcg</span>(p, d);<br>        &#125;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-built_in">pushdown</span>(p);<br>    <span class="hljs-type">int</span> mid = segt[p].r + segt[p].l &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (cl &lt;= mid)<br>        <span class="hljs-built_in">icg</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, cr, o, d);<br>    <span class="hljs-keyword">if</span> (cr &gt;= mid + <span class="hljs-number">1</span>)<br>        <span class="hljs-built_in">icg</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, cl, cr, o, d);<br>    segt[p].sum1 = (segt[p &lt;&lt; <span class="hljs-number">1</span>].sum1 + segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum1) % M;<br>    segt[p].sum2 = (segt[p &lt;&lt; <span class="hljs-number">1</span>].sum2 + segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum2) % M;<br>    segt[p].sum3 = (segt[p &lt;&lt; <span class="hljs-number">1</span>].sum3 + segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum3) % M;<br>&#125;<br><span class="hljs-function">ll <span class="hljs-title">ick</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr, <span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (cl &lt;= segt[p].l &amp;&amp; segt[p].r &lt;= cr)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (k == <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> segt[p].sum1;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (k == <span class="hljs-number">2</span>)<br>            <span class="hljs-keyword">return</span> segt[p].sum2;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (k == <span class="hljs-number">3</span>)<br>            <span class="hljs-keyword">return</span> segt[p].sum3;<br>    &#125;<br>    <span class="hljs-built_in">pushdown</span>(p);<br>    <span class="hljs-type">int</span> mid = segt[p].r + segt[p].l &gt;&gt; <span class="hljs-number">1</span>;<br>    ll val = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span> (cl &lt;= mid)<br>        val += <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, cr, k);<br>    <span class="hljs-keyword">if</span> (cr &gt;= mid + <span class="hljs-number">1</span>)<br>        val += <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, cl, cr, k);<br>    <span class="hljs-keyword">return</span> val % M;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> n, m, x, y, d, o;<br>    <span class="hljs-keyword">while</span> (~<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>, &amp;n, &amp;m) &amp;&amp; (n || m))<br>    &#123;<br>        <span class="hljs-built_in">build</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, n);<br>        <span class="hljs-keyword">while</span> (m--)<br>        &#123;<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d%d&quot;</span>, &amp;o, &amp;x, &amp;y, &amp;d);<br>            <span class="hljs-keyword">if</span>(o!=<span class="hljs-number">4</span>)<br>            &#123;<br>                <span class="hljs-built_in">icg</span>(<span class="hljs-number">1</span>,x,y,o,d);<br>            &#125;<br>            <span class="hljs-keyword">else</span><br>            &#123;<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,<span class="hljs-built_in">ick</span>(<span class="hljs-number">1</span>,x,y,d));<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+## G Can you answer these queries?
+#### 思路
+朴素地想，对于一次修改，递归到叶节点进行平方根操作，很不幸，会卡时间；
+
+但是我们可以发现，如果某叶节点的值若为1或0，则进行平方根修改并不能影响其的值；
+
+这样就可以进行标记，如果某节点下所有点都是1或0，则不需要对其进行修改，降低了复杂度；
+
+这道题很坑的一点是，区间左右界的相对大小并不明确，需要修正非法数据；
+#### 代码
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> INF = <span class="hljs-number">0x3f3f3f3f</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1e5</span> + <span class="hljs-number">5</span>;<br><span class="hljs-keyword">struct</span><br>&#123;<br>    <span class="hljs-type">int</span> l, r;   <span class="hljs-comment">//l,r为节点的左右界</span><br>    ll sum, lt; <span class="hljs-comment">//sum为节点值，lt为懒标记</span><br>&#125; segt[N &lt;&lt; <span class="hljs-number">2</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    segt[p].l = cl, segt[p].r = cr, segt[p].lt = <span class="hljs-number">0</span>, segt[p].sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span> (cl == cr)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;segt[p].sum);<br>        segt[p].lt = segt[p].sum &lt;= <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> mid = cl + cr &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, mid);<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, cr);<br>    segt[p].sum = segt[p &lt;&lt; <span class="hljs-number">1</span>].sum + segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum;<br>    segt[p].lt = (segt[p &lt;&lt; <span class="hljs-number">1</span>].lt == <span class="hljs-number">1</span> &amp;&amp; segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].lt == <span class="hljs-number">1</span>);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">icg</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (segt[p].lt)<br>        <span class="hljs-keyword">return</span>;<br>    <span class="hljs-keyword">if</span> (segt[p].l == segt[p].r)<br>    &#123;<br>        segt[p].sum = (ll)<span class="hljs-built_in">sqrt</span>(segt[p].sum*<span class="hljs-number">1.0</span>);<br>        segt[p].lt = segt[p].sum &lt;= <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> mid = segt[p].r + segt[p].l &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (cl &lt;= mid)<br>        <span class="hljs-built_in">icg</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, cr);<br>    <span class="hljs-keyword">if</span> (cr &gt;= mid + <span class="hljs-number">1</span>)<br>        <span class="hljs-built_in">icg</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, cl, cr);<br>    segt[p].sum = segt[p &lt;&lt; <span class="hljs-number">1</span>].sum + segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum;<br>    segt[p].lt = (segt[p &lt;&lt; <span class="hljs-number">1</span>].lt == <span class="hljs-number">1</span> &amp;&amp; segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].lt == <span class="hljs-number">1</span>);<br>&#125;<br><span class="hljs-function">ll <span class="hljs-title">ick</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (cl &lt;= segt[p].l &amp;&amp; segt[p].r &lt;= cr)<br>        <span class="hljs-keyword">return</span> segt[p].sum;<br>    <span class="hljs-type">int</span> mid = segt[p].r + segt[p].l &gt;&gt; <span class="hljs-number">1</span>;<br>    ll val = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span> (cl &lt;= mid)<br>        val += <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, cr);<br>    <span class="hljs-keyword">if</span> (cr &gt;= mid + <span class="hljs-number">1</span>)<br>        val += <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, cl, cr);<br>    <span class="hljs-keyword">return</span> val;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> n, q, l, r, k, c = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span> (~<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n))<br>    &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Case #%d:\n&quot;</span>, c++);<br>        <span class="hljs-built_in">build</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, n);<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;q);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= q; i++)<br>        &#123;<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d&quot;</span>, &amp;k, &amp;l, &amp;r);<br>            <span class="hljs-keyword">if</span>(l&gt;r)<span class="hljs-built_in">swap</span>(l,r);<br>            <span class="hljs-keyword">if</span> (k == <span class="hljs-number">0</span>)<br>                <span class="hljs-built_in">icg</span>(<span class="hljs-number">1</span>, l, r);<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (k == <span class="hljs-number">1</span>)<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, <span class="hljs-built_in">ick</span>(<span class="hljs-number">1</span>, l, r));<br>        &#125;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+## H A Simple Problem with Integers
+#### 思路
+板~
+
+区间修改，区间查询；
+#### 代码
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;math.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> INF = <span class="hljs-number">0x3f3f3f3f</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1e5</span>;<br><span class="hljs-keyword">struct</span><br>&#123;<br>    <span class="hljs-type">int</span> l, r;<span class="hljs-comment">//l,r为节点的左右界</span><br>    ll sum, lt;<span class="hljs-comment">//sum为节点值，lt为懒标记</span><br>&#125; segt[N &lt;&lt; <span class="hljs-number">2</span> | <span class="hljs-number">1</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pushdown</span><span class="hljs-params">(<span class="hljs-type">int</span> p)</span><span class="hljs-comment">//对懒标记进行下传</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (segt[p].lt)<br>    &#123;<br>        segt[p &lt;&lt; <span class="hljs-number">1</span>].sum += segt[p].lt * (segt[p &lt;&lt; <span class="hljs-number">1</span>].r - segt[p &lt;&lt; <span class="hljs-number">1</span>].l + <span class="hljs-number">1</span>);<br>        segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum += segt[p].lt * (segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].r - segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].l + <span class="hljs-number">1</span>);<br>        segt[p &lt;&lt; <span class="hljs-number">1</span>].lt += segt[p].lt;<br>        segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].lt += segt[p].lt;<br>        segt[p].lt = <span class="hljs-number">0</span>;<br>    &#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    segt[p].l = cl, segt[p].r = cr, segt[p].lt = <span class="hljs-number">0</span>, segt[p].sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span> (cl == cr)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;segt[p].sum);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-type">int</span> mid = cl + cr &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, mid);<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, cr);<br>    segt[p].sum = segt[p &lt;&lt; <span class="hljs-number">1</span>].sum + segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">icg</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr, ll d)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (cl &lt;= segt[p].l &amp;&amp; segt[p].r &lt;= cr)<br>    &#123;<br>        segt[p].sum += d * (segt[p].r - segt[p].l + <span class="hljs-number">1</span>);<br>        segt[p].lt += d;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-built_in">pushdown</span>(p);<br>    <span class="hljs-type">int</span> mid = segt[p].r + segt[p].l &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (cl &lt;= mid)<br>        <span class="hljs-built_in">icg</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, cr, d);<br>    <span class="hljs-keyword">if</span> (cr &gt;= mid + <span class="hljs-number">1</span>)<br>        <span class="hljs-built_in">icg</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, cl, cr, d);<br>    segt[p].sum = segt[p &lt;&lt; <span class="hljs-number">1</span>].sum + segt[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].sum;<br>&#125;<br><br><span class="hljs-function">ll <span class="hljs-title">ick</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> cl, <span class="hljs-type">int</span> cr)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (cl &lt;= segt[p].l &amp;&amp; segt[p].r &lt;= cr)<br>        <span class="hljs-keyword">return</span> segt[p].sum;<br>    <span class="hljs-built_in">pushdown</span>(p);<br>    <span class="hljs-type">int</span> mid = segt[p].r + segt[p].l &gt;&gt; <span class="hljs-number">1</span>;<br>    ll val = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">if</span> (cl &lt;= mid)<br>        val += <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span>, cl, cr);<br>    <span class="hljs-keyword">if</span> (cr &gt;= mid + <span class="hljs-number">1</span>)<br>        val += <span class="hljs-built_in">ick</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, cl, cr);<br>    <span class="hljs-keyword">return</span> val;<br>&#125;<br><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> n, q, l, r, k;<br>    <span class="hljs-type">char</span> o;<br>    <span class="hljs-keyword">while</span> (~<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>, &amp;n,&amp;q))<br>    &#123;<br>        <span class="hljs-built_in">build</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, n);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= q; i++)<br>        &#123;<br>            cin&gt;&gt;o;<br>            <span class="hljs-keyword">if</span>(o==<span class="hljs-string">&#x27;C&#x27;</span>)<br>            &#123;<br>                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d&quot;</span>,&amp;l,&amp;r,&amp;k);<br>                <span class="hljs-built_in">icg</span>(<span class="hljs-number">1</span>,l,r,k);<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(o==<span class="hljs-string">&#x27;Q&#x27;</span>)<br>            &#123;<br>                <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;l,&amp;r);<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,<span class="hljs-built_in">ick</span>(<span class="hljs-number">1</span>,l,r));<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+## ED
+\
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/" class="category-chain-item">算法竞赛</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B/%E6%AF%94%E8%B5%9B%E4%B8%8E%E9%A2%98%E9%9B%86/" class="category-chain-item">比赛与题集</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>NEFU大一暑假集训-线段树</div>
+      <div>https://tanyuu.github.io/2021.07-12/NEFU大一暑假集训-线段树/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>F Juny</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年8月28日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021.07-12/BLO-Blockade-%E5%89%B2%E7%82%B9/" title="BLO-Blockade-割点">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">BLO-Blockade-割点</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021.07-12/Junk-Mail%20Filter-%E5%B9%B6%E6%9F%A5%E9%9B%86/" title="Junk-Mail Filter-并查集">
+                        <span class="hidden-mobile">Junk-Mail Filter-并查集</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
