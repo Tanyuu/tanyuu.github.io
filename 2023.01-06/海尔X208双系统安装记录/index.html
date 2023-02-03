@@ -1,0 +1,654 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/assets/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="rgb(45,86,141)">
+  <meta name="author" content="F Juny">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="写在前面 在同学的提醒和一些潜在需求的驱动下，想找一台物理机装Linux来玩，担心搞砸（差点发生了）带来的严重后果，决定使用家里的闲置笔记本。 至于需求是否真的迫切或者必要，我现在还是没有判断的，但是至少在这个过程中接触到了一些更基础的内容。  软硬件基础情况 X208上市时间 2010年，处理器 Intel Atom CPU N450 1.66GHz，显卡 Intel® Grapics Med">
+<meta property="og:type" content="article">
+<meta property="og:title" content="海尔X208双系统安装记录">
+<meta property="og:url" content="https://tanyuu.github.io/2023.01-06/%E6%B5%B7%E5%B0%94X208%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Yu_Tang">
+<meta property="og:description" content="写在前面 在同学的提醒和一些潜在需求的驱动下，想找一台物理机装Linux来玩，担心搞砸（差点发生了）带来的严重后果，决定使用家里的闲置笔记本。 至于需求是否真的迫切或者必要，我现在还是没有判断的，但是至少在这个过程中接触到了一些更基础的内容。  软硬件基础情况 X208上市时间 2010年，处理器 Intel Atom CPU N450 1.66GHz，显卡 Intel® Grapics Med">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/02/03/ZmRXcdMjCLpsPrv.png">
+<meta property="og:image" content="https://s2.loli.net/2023/02/03/wY6NtoalLJqePQ3.jpg">
+<meta property="article:published_time" content="2023-02-03T09:00:54.000Z">
+<meta property="article:modified_time" content="2023-02-03T09:01:03.757Z">
+<meta property="article:author" content="Fu Junyuan">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s2.loli.net/2023/02/03/ZmRXcdMjCLpsPrv.png">
+  
+  
+  
+  <title>海尔X208双系统安装记录 - Yu_Tang</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tanyuu.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="Yu_Tang" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 35vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>煜·塘</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/img/wide_home.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="海尔X208双系统安装记录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-02-03 17:00" pubdate>
+          2023年2月3日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">海尔X208双系统安装记录</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="写在前面"><a class="markdownIt-Anchor" href="#写在前面"></a> 写在前面</h2>
+<p>在同学的提醒和一些潜在需求的驱动下，想找一台物理机装Linux来玩，担心搞砸（差点发生了）带来的严重后果，决定使用家里的闲置笔记本。</p>
+<p>至于需求是否真的迫切或者必要，我现在还是没有判断的，但是至少在这个过程中接触到了一些更基础的内容。</p>
+<h2 id="软硬件基础情况"><a class="markdownIt-Anchor" href="#软硬件基础情况"></a> 软硬件基础情况</h2>
+<p>X208上市时间 2010年，处理器 Intel Atom CPU N450 1.66GHz，显卡 Intel® Grapics Media Accelerator 3150，内存 Samsung DDR2 1GB 某型，硬盘 希捷Momentus 5400.6 250G(ST9250315AS)，有线网卡 Atheros AR8132 PCI-E， 无线网卡 Intel® WiFi Link 1000 BGN。</p>
+<blockquote>
+<p>这个无线网卡只支持到Wifi 5</p>
+</blockquote>
+<p>BIOS版本 InsydeH20 Rev. 3.5，原操作系统 Windows XP Professional 版本2002 Service Pack 3。</p>
+<p>新操作系统为 Ubuntu 20.04 Server。</p>
+<h2 id="流程概述"><a class="markdownIt-Anchor" href="#流程概述"></a> 流程概述</h2>
+<p>可以参照<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1554y1n7zv">此教程</a></p>
+<ol>
+<li>
+<p>原系统备份</p>
+</li>
+<li>
+<p>使用XP的磁盘管理工具进行分区</p>
+<p>这里理论来说Linux的安装程序也可以通过LVM来实现这一步骤，但是遇到了若干问题，最后绕开了。</p>
+</li>
+<li>
+<p>制作引导盘</p>
+</li>
+<li>
+<p>更改BIOS引导设置</p>
+</li>
+<li>
+<p>安装</p>
+</li>
+</ol>
+<h2 id="problems"><a class="markdownIt-Anchor" href="#problems"></a> Problems</h2>
+<h3 id="1-windows不识别移动硬盘磁盘管理显示其为gpt保护分区"><a class="markdownIt-Anchor" href="#1-windows不识别移动硬盘磁盘管理显示其为gpt保护分区"></a> 1. Windows不识别移动硬盘，磁盘管理显示其为“GPT保护分区”</h3>
+<p><img src="https://s2.loli.net/2023/02/03/ZmRXcdMjCLpsPrv.png" srcset="/img/loading.gif" lazyload alt="32位XP不支持" /></p>
+<p>一般来说可以将磁盘格式化成MBR分区，但是移动硬盘上的数据不太方便备份，最终换了个U盘来做原系统的数据备份。</p>
+<p>至于MBR与GPT相互转换的方法，可以参照<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33770878/article/details/86354297">这里</a>，<strong>注意此方法会擦除磁盘数据</strong>（在找资料时已经见到太多惨剧了）。</p>
+<h3 id="2-grub报错grub-error-cant-find-command-grub_platform"><a class="markdownIt-Anchor" href="#2-grub报错grub-error-cant-find-command-grub_platform"></a> 2. GRUB报错：Grub error: Can’t find command ‘grub_platform’</h3>
+<p>[来源](<a target="_blank" rel="noopener" href="https://askubuntu.com/questions/1288476/can-not-install-from-usb-with-error-cannot-find-grub-platform">grub2 - can not install from usb with error cannot find grub_platform - Ask Ubuntu</a>)</p>
+<p>此版本GRUB不适配GPT引导盘。可以通过<a target="_blank" rel="noopener" href="https://rufus.ie/zh/#google_vignette">Rufus</a>制作指定格式的引导盘。</p>
+<h3 id="3-关于桌面版安装程序的问题"><a class="markdownIt-Anchor" href="#3-关于桌面版安装程序的问题"></a> 3. 关于桌面版安装程序的问题</h3>
+<p>最开始尝试的是Ubuntu22.04桌面版，进入试用版桌面后及其卡顿几乎无法进行任何操作（包括打开终端），可能是由于gnome的负担过大。</p>
+<p>遂尝试了Ubuntu18.04桌面版，由于显示器过小安装程序窗口无法完全显示（应该是可以解决的）和同学的建议（18.04好多bug）而放弃。</p>
+<p>接下来计划先安装某服务器版，再安装较轻量级的桌面。</p>
+<p><img src="https://s2.loli.net/2023/02/03/wY6NtoalLJqePQ3.jpg" srcset="/img/loading.gif" lazyload alt="快说谢谢万叶" /></p>
+<h3 id="4-安装失败报错pv_min_size-is-too-small"><a class="markdownIt-Anchor" href="#4-安装失败报错pv_min_size-is-too-small"></a> 4. 安装失败报错“pv_min_size is too small”</h3>
+<p>[来源1](<a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/255886/unable-to-run-the-pvcreate-command">hard disk - Unable to run the pvcreate command - Unix &amp; Linux Stack Exchange</a>)，[来源2]([<a target="_blank" rel="noopener" href="https://www.linuxquestions.org/questions/linux-software-2/issue-with-partitions-lvm-895597/">SOLVED] Issue with Partitions/LVM (linuxquestions.org)</a>)</p>
+<p>推测是硬盘分配单元大小过小，应该设置至少为2048KB。使用XP的硬盘管理重新格式化解决。</p>
+<h3 id="5-安装失败报错expecting-swap-found-none"><a class="markdownIt-Anchor" href="#5-安装失败报错expecting-swap-found-none"></a> 5. 安装失败报错“expecting swap, found none”</h3>
+<p>[来源1]([<a target="_blank" rel="noopener" href="https://www.mail-archive.com/ubuntu-bugs@lists.ubuntu.com/msg5847941.html">Bug 1878890] Re: [Ubuntu Server 20.04 LTS]: Failed Install (subiquity…install_fail/add_info) during partitioning (mail-archive.com)</a>)，[来源2]([错误 #1878890 “<a target="_blank" rel="noopener" href="https://bugs.launchpad.net/subiquity/+bug/1878890">Ubuntu 服务器 20.04 LTS]：安装失败（subiqui…）：错误：subiquity (launchpad.net)</a>)，[来源3](<a target="_blank" rel="noopener" href="https://bugs.launchpad.net/ubuntu/+source/subiquity/+bug/1952545">Bug #1952545 “Subsiquity Installer fails during verification of …” : Bugs : subiquity package : Ubuntu (launchpad.net)</a>)</p>
+<p>报错发生在 <code>configuring partition:partition-xxxx</code> 处理分配给swap的空间时。参照来源2的解决方法进行了edge更新，但是依然存在问题。最后选择了先不分配swap空间。</p>
+<h2 id="结尾"><a class="markdownIt-Anchor" href="#结尾"></a> 结尾</h2>
+<p>是遇到了一堆问题，但是好像最后绕开了好多……</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>海尔X208双系统安装记录</div>
+      <div>https://tanyuu.github.io/2023.01-06/海尔X208双系统安装记录/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>F Juny</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年2月3日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022.07-12/2022%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A510%EF%BC%88FHI%EF%BC%89/" title="2022牛客暑期多校训练营10（FHI）">
+                        <span class="hidden-mobile">2022牛客暑期多校训练营10（FHI）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
