@@ -8,7 +8,7 @@
     <link href="/2023.01-06/%E6%B5%B7%E5%B0%94X208%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/"/>
     <url>/2023.01-06/%E6%B5%B7%E5%B0%94X208%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/</url>
     
-    <content type="html"><![CDATA[<h2 id="写在前面"><a class="markdownIt-Anchor" href="#写在前面"></a> 写在前面</h2><p>在同学的提醒和一些潜在需求的驱动下，想找一台物理机装Linux来玩，担心搞砸（差点发生了）带来的严重后果，决定使用家里的闲置笔记本。</p><p>至于需求是否真的迫切或者必要，我现在还是没有判断的，但是至少在这个过程中接触到了一些更基础的内容。</p><h2 id="软硬件基础情况"><a class="markdownIt-Anchor" href="#软硬件基础情况"></a> 软硬件基础情况</h2><p>X208上市时间 2010年，处理器 Intel Atom CPU N450 1.66GHz，显卡 Intel® Grapics Media Accelerator 3150，内存 Samsung DDR2 1GB 某型，硬盘 希捷Momentus 5400.6 250G(ST9250315AS)，有线网卡 Atheros AR8132 PCI-E， 无线网卡 Intel® WiFi Link 1000 BGN。</p><blockquote><p>这个无线网卡只支持到Wifi 5</p></blockquote><p>BIOS版本 InsydeH20 Rev. 3.5，原操作系统 Windows XP Professional 版本2002 Service Pack 3。</p><p>新操作系统为 Ubuntu 20.04 Server。</p><h2 id="流程概述"><a class="markdownIt-Anchor" href="#流程概述"></a> 流程概述</h2><p>可以参照<a href="https://www.bilibili.com/video/BV1554y1n7zv">此教程</a></p><ol><li><p>原系统备份</p></li><li><p>使用XP的磁盘管理工具进行分区</p><p>这里理论来说Linux的安装程序也可以通过LVM来实现这一步骤，但是遇到了若干问题，最后绕开了。</p></li><li><p>制作引导盘</p></li><li><p>更改BIOS引导设置</p></li><li><p>安装</p></li></ol><h2 id="problems"><a class="markdownIt-Anchor" href="#problems"></a> Problems</h2><h3 id="1-windows不识别移动硬盘磁盘管理显示其为gpt保护分区"><a class="markdownIt-Anchor" href="#1-windows不识别移动硬盘磁盘管理显示其为gpt保护分区"></a> 1. Windows不识别移动硬盘，磁盘管理显示其为“GPT保护分区”</h3><p><img src="https://s2.loli.net/2023/02/03/ZmRXcdMjCLpsPrv.png" alt="32位XP不支持" /></p><p>一般来说可以将磁盘格式化成MBR分区，但是移动硬盘上的数据不太方便备份，最终换了个U盘来做原系统的数据备份。</p><p>至于MBR与GPT相互转换的方法，可以参照<a href="https://blog.csdn.net/weixin_33770878/article/details/86354297">这里</a>，<strong>注意此方法会擦除磁盘数据</strong>（在找资料时已经见到太多惨剧了）。</p><h3 id="2-grub报错grub-error-cant-find-command-grub_platform"><a class="markdownIt-Anchor" href="#2-grub报错grub-error-cant-find-command-grub_platform"></a> 2. GRUB报错：Grub error: Can’t find command ‘grub_platform’</h3><p>[来源](<a href="https://askubuntu.com/questions/1288476/can-not-install-from-usb-with-error-cannot-find-grub-platform">grub2 - can not install from usb with error cannot find grub_platform - Ask Ubuntu</a>)</p><p>此版本GRUB不适配GPT引导盘。可以通过<a href="https://rufus.ie/zh/#google_vignette">Rufus</a>制作指定格式的引导盘。</p><h3 id="3-关于桌面版安装程序的问题"><a class="markdownIt-Anchor" href="#3-关于桌面版安装程序的问题"></a> 3. 关于桌面版安装程序的问题</h3><p>最开始尝试的是Ubuntu22.04桌面版，进入试用版桌面后及其卡顿几乎无法进行任何操作（包括打开终端），可能是由于gnome的负担过大。</p><p>遂尝试了Ubuntu18.04桌面版，由于显示器过小安装程序窗口无法完全显示（应该是可以解决的）和同学的建议（18.04好多bug）而放弃。</p><p>接下来计划先安装某服务器版，再安装较轻量级的桌面。</p><p><img src="https://s2.loli.net/2023/02/03/wY6NtoalLJqePQ3.jpg" alt="快说谢谢万叶" /></p><h3 id="4-安装失败报错pv_min_size-is-too-small"><a class="markdownIt-Anchor" href="#4-安装失败报错pv_min_size-is-too-small"></a> 4. 安装失败报错“pv_min_size is too small”</h3><p>[来源1](<a href="https://unix.stackexchange.com/questions/255886/unable-to-run-the-pvcreate-command">hard disk - Unable to run the pvcreate command - Unix &amp; Linux Stack Exchange</a>)，[来源2]([<a href="https://www.linuxquestions.org/questions/linux-software-2/issue-with-partitions-lvm-895597/">SOLVED] Issue with Partitions/LVM (linuxquestions.org)</a>)</p><p>推测是硬盘分配单元大小过小，应该设置至少为2048KB。使用XP的硬盘管理重新格式化解决。</p><h3 id="5-安装失败报错expecting-swap-found-none"><a class="markdownIt-Anchor" href="#5-安装失败报错expecting-swap-found-none"></a> 5. 安装失败报错“expecting swap, found none”</h3><p>[来源1]([<a href="https://www.mail-archive.com/ubuntu-bugs@lists.ubuntu.com/msg5847941.html">Bug 1878890] Re: [Ubuntu Server 20.04 LTS]: Failed Install (subiquity…install_fail/add_info) during partitioning (mail-archive.com)</a>)，[来源2]([错误 #1878890 “<a href="https://bugs.launchpad.net/subiquity/+bug/1878890">Ubuntu 服务器 20.04 LTS]：安装失败（subiqui…）：错误：subiquity (launchpad.net)</a>)，[来源3](<a href="https://bugs.launchpad.net/ubuntu/+source/subiquity/+bug/1952545">Bug #1952545 “Subsiquity Installer fails during verification of …” : Bugs : subiquity package : Ubuntu (launchpad.net)</a>)</p><p>报错发生在 <code>configuring partition:partition-xxxx</code> 处理分配给swap的空间时。参照来源2的解决方法进行了edge更新，但是依然存在问题。最后选择了先不分配swap空间。</p><h2 id="结尾"><a class="markdownIt-Anchor" href="#结尾"></a> 结尾</h2><p>是遇到了一堆问题，但是好像最后绕开了好多……</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="写在前面"><a class="markdownIt-Anchor" href="#写在前面"></a> 写在前面</h2><p>在同学的提醒和一些潜在需求的驱动下，想找一台物理机装Linux来玩，担心搞砸（差点发生了）带来的严重后果，决定使用家里的闲置笔记本。</p><p>至于需求是否真的迫切或者必要，我现在还是没有判断的，但是至少在这个过程中接触到了一些更基础的内容。</p><h2 id="软硬件基础情况"><a class="markdownIt-Anchor" href="#软硬件基础情况"></a> 软硬件基础情况</h2><p>X208上市时间 2010年，处理器 Intel Atom CPU N450 1.66GHz，显卡 Intel® Grapics Media Accelerator 3150，内存 Samsung DDR2 1GB 某型，硬盘 希捷Momentus 5400.6 250G(ST9250315AS)，有线网卡 Atheros AR8132 PCI-E， 无线网卡 Intel® WiFi Link 1000 BGN。</p><blockquote><p>这个无线网卡只支持到Wifi 5</p></blockquote><p>BIOS版本 InsydeH20 Rev. 3.5，原操作系统 Windows XP Professional 版本2002 Service Pack 3。</p><p>新操作系统为 Ubuntu 20.04 Server。</p><h2 id="流程概述"><a class="markdownIt-Anchor" href="#流程概述"></a> 流程概述</h2><p>可以参照<a href="https://www.bilibili.com/video/BV1554y1n7zv">此教程</a></p><ol><li><p>原系统备份</p></li><li><p>使用XP的磁盘管理工具进行分区</p><p>这里理论来说Linux的安装程序也可以通过LVM来实现这一步骤，但是遇到了若干问题，最后绕开了。</p></li><li><p>制作引导盘</p></li><li><p>更改BIOS引导设置</p></li><li><p>安装</p></li></ol><h2 id="problems"><a class="markdownIt-Anchor" href="#problems"></a> Problems</h2><h3 id="1-windows不识别移动硬盘磁盘管理显示其为gpt保护分区"><a class="markdownIt-Anchor" href="#1-windows不识别移动硬盘磁盘管理显示其为gpt保护分区"></a> 1. Windows不识别移动硬盘，磁盘管理显示其为“GPT保护分区”</h3><p><img src="https://s2.loli.net/2023/02/03/ZmRXcdMjCLpsPrv.png" alt="32位XP不支持" /></p><p>一般来说可以将磁盘格式化成MBR分区，但是移动硬盘上的数据不太方便备份，最终换了个U盘来做原系统的数据备份。</p><p>至于MBR与GPT相互转换的方法，可以参照<a href="https://blog.csdn.net/weixin_33770878/article/details/86354297">这里</a>，<strong>注意此方法会擦除磁盘数据</strong>（在找资料时已经见到太多惨剧了）。</p><h3 id="2-grub报错grub-error-cant-find-command-grub_platform"><a class="markdownIt-Anchor" href="#2-grub报错grub-error-cant-find-command-grub_platform"></a> 2. GRUB报错：Grub error: Can’t find command ‘grub_platform’</h3><p><a href="https://askubuntu.com/questions/1288476/can-not-install-from-usb-with-error-cannot-find-grub-platform">来源</a></p><p>此版本GRUB不适配GPT引导盘。可以通过<a href="https://rufus.ie/zh/#google_vignette">Rufus</a>制作指定格式的引导盘。</p><h3 id="3-关于桌面版安装程序的问题"><a class="markdownIt-Anchor" href="#3-关于桌面版安装程序的问题"></a> 3. 关于桌面版安装程序的问题</h3><p>最开始尝试的是Ubuntu22.04桌面版，进入试用版桌面后及其卡顿几乎无法进行任何操作（包括打开终端），可能是由于gnome的负担过大。</p><p>遂尝试了Ubuntu18.04桌面版，由于显示器过小安装程序窗口无法完全显示（应该是可以解决的）和同学的建议（18.04好多bug）而放弃。</p><p>接下来计划先安装某服务器版，再安装较轻量级的桌面。</p><img src="https://s2.loli.net/2023/02/03/wY6NtoalLJqePQ3.jpg" alt="快说谢谢万叶" style="zoom:50%;" /><h3 id="4-安装失败报错pv_min_size-is-too-small"><a class="markdownIt-Anchor" href="#4-安装失败报错pv_min_size-is-too-small"></a> 4. 安装失败报错“pv_min_size is too small”</h3><p><a href="https://unix.stackexchange.com/questions/255886/unable-to-run-the-pvcreate-command">来源1</a>，<a href="https://www.linuxquestions.org/questions/linux-software-2/issue-with-partitions-lvm-895597/">来源2</a></p><p>推测是硬盘分配单元大小过小，应该设置至少为2048KB。使用XP的硬盘管理重新格式化解决。</p><h3 id="5-安装失败报错expecting-swap-found-none"><a class="markdownIt-Anchor" href="#5-安装失败报错expecting-swap-found-none"></a> 5. 安装失败报错“expecting swap, found none”</h3><p><a href="https://www.mail-archive.com/ubuntu-bugs@lists.ubuntu.com/msg5847941.html">来源1</a>，<a href="https://bugs.launchpad.net/subiquity/+bug/1878890">来源2</a>，<a href="https://bugs.launchpad.net/ubuntu/+source/subiquity/+bug/1952545">来源3</a></p><p>报错发生在 <code>configuring partition:partition-xxxx</code> 处理分配给swap的空间时。参照来源2的解决方法进行了edge更新，但是依然存在问题。最后选择了先不分配swap空间。</p><h2 id="结尾"><a class="markdownIt-Anchor" href="#结尾"></a> 结尾</h2><p>是遇到了一堆问题，但是好像最后绕开了好多……</p>]]></content>
     
     
     <categories>
@@ -316,9 +316,9 @@
       
       <category>算法竞赛</category>
       
-      <category>DP与贪心</category>
-      
       <category>图与树</category>
+      
+      <category>DP与贪心</category>
       
     </categories>
     
@@ -505,9 +505,9 @@
       
       <category>算法竞赛</category>
       
-      <category>DP与贪心</category>
-      
       <category>数据结构</category>
+      
+      <category>DP与贪心</category>
       
     </categories>
     
@@ -1116,9 +1116,9 @@
       
       <category>算法竞赛</category>
       
-      <category>DP与贪心</category>
-      
       <category>图与树</category>
+      
+      <category>DP与贪心</category>
       
     </categories>
     
@@ -1160,9 +1160,9 @@
       
       <category>算法竞赛</category>
       
-      <category>DP与贪心</category>
-      
       <category>数据结构</category>
+      
+      <category>DP与贪心</category>
       
     </categories>
     

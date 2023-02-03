@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/02/03/ZmRXcdMjCLpsPrv.png">
 <meta property="og:image" content="https://s2.loli.net/2023/02/03/wY6NtoalLJqePQ3.jpg">
 <meta property="article:published_time" content="2023-02-03T09:00:54.000Z">
-<meta property="article:modified_time" content="2023-02-03T09:01:03.757Z">
+<meta property="article:modified_time" content="2023-02-03T09:09:15.275Z">
 <meta property="article:author" content="Fu Junyuan">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://s2.loli.net/2023/02/03/ZmRXcdMjCLpsPrv.png">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          1.2k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          15 分钟
+          10 分钟
         
       </span>
     
@@ -312,18 +312,18 @@
 <p>一般来说可以将磁盘格式化成MBR分区，但是移动硬盘上的数据不太方便备份，最终换了个U盘来做原系统的数据备份。</p>
 <p>至于MBR与GPT相互转换的方法，可以参照<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33770878/article/details/86354297">这里</a>，<strong>注意此方法会擦除磁盘数据</strong>（在找资料时已经见到太多惨剧了）。</p>
 <h3 id="2-grub报错grub-error-cant-find-command-grub_platform"><a class="markdownIt-Anchor" href="#2-grub报错grub-error-cant-find-command-grub_platform"></a> 2. GRUB报错：Grub error: Can’t find command ‘grub_platform’</h3>
-<p>[来源](<a target="_blank" rel="noopener" href="https://askubuntu.com/questions/1288476/can-not-install-from-usb-with-error-cannot-find-grub-platform">grub2 - can not install from usb with error cannot find grub_platform - Ask Ubuntu</a>)</p>
+<p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/1288476/can-not-install-from-usb-with-error-cannot-find-grub-platform">来源</a></p>
 <p>此版本GRUB不适配GPT引导盘。可以通过<a target="_blank" rel="noopener" href="https://rufus.ie/zh/#google_vignette">Rufus</a>制作指定格式的引导盘。</p>
 <h3 id="3-关于桌面版安装程序的问题"><a class="markdownIt-Anchor" href="#3-关于桌面版安装程序的问题"></a> 3. 关于桌面版安装程序的问题</h3>
 <p>最开始尝试的是Ubuntu22.04桌面版，进入试用版桌面后及其卡顿几乎无法进行任何操作（包括打开终端），可能是由于gnome的负担过大。</p>
 <p>遂尝试了Ubuntu18.04桌面版，由于显示器过小安装程序窗口无法完全显示（应该是可以解决的）和同学的建议（18.04好多bug）而放弃。</p>
 <p>接下来计划先安装某服务器版，再安装较轻量级的桌面。</p>
-<p><img src="https://s2.loli.net/2023/02/03/wY6NtoalLJqePQ3.jpg" srcset="/img/loading.gif" lazyload alt="快说谢谢万叶" /></p>
+<img src="https://s2.loli.net/2023/02/03/wY6NtoalLJqePQ3.jpg" srcset="/img/loading.gif" lazyload alt="快说谢谢万叶" style="zoom:50%;" />
 <h3 id="4-安装失败报错pv_min_size-is-too-small"><a class="markdownIt-Anchor" href="#4-安装失败报错pv_min_size-is-too-small"></a> 4. 安装失败报错“pv_min_size is too small”</h3>
-<p>[来源1](<a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/255886/unable-to-run-the-pvcreate-command">hard disk - Unable to run the pvcreate command - Unix &amp; Linux Stack Exchange</a>)，[来源2]([<a target="_blank" rel="noopener" href="https://www.linuxquestions.org/questions/linux-software-2/issue-with-partitions-lvm-895597/">SOLVED] Issue with Partitions/LVM (linuxquestions.org)</a>)</p>
+<p><a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/255886/unable-to-run-the-pvcreate-command">来源1</a>，<a target="_blank" rel="noopener" href="https://www.linuxquestions.org/questions/linux-software-2/issue-with-partitions-lvm-895597/">来源2</a></p>
 <p>推测是硬盘分配单元大小过小，应该设置至少为2048KB。使用XP的硬盘管理重新格式化解决。</p>
 <h3 id="5-安装失败报错expecting-swap-found-none"><a class="markdownIt-Anchor" href="#5-安装失败报错expecting-swap-found-none"></a> 5. 安装失败报错“expecting swap, found none”</h3>
-<p>[来源1]([<a target="_blank" rel="noopener" href="https://www.mail-archive.com/ubuntu-bugs@lists.ubuntu.com/msg5847941.html">Bug 1878890] Re: [Ubuntu Server 20.04 LTS]: Failed Install (subiquity…install_fail/add_info) during partitioning (mail-archive.com)</a>)，[来源2]([错误 #1878890 “<a target="_blank" rel="noopener" href="https://bugs.launchpad.net/subiquity/+bug/1878890">Ubuntu 服务器 20.04 LTS]：安装失败（subiqui…）：错误：subiquity (launchpad.net)</a>)，[来源3](<a target="_blank" rel="noopener" href="https://bugs.launchpad.net/ubuntu/+source/subiquity/+bug/1952545">Bug #1952545 “Subsiquity Installer fails during verification of …” : Bugs : subiquity package : Ubuntu (launchpad.net)</a>)</p>
+<p><a target="_blank" rel="noopener" href="https://www.mail-archive.com/ubuntu-bugs@lists.ubuntu.com/msg5847941.html">来源1</a>，<a target="_blank" rel="noopener" href="https://bugs.launchpad.net/subiquity/+bug/1878890">来源2</a>，<a target="_blank" rel="noopener" href="https://bugs.launchpad.net/ubuntu/+source/subiquity/+bug/1952545">来源3</a></p>
 <p>报错发生在 <code>configuring partition:partition-xxxx</code> 处理分配给swap的空间时。参照来源2的解决方法进行了edge更新，但是依然存在问题。最后选择了先不分配swap空间。</p>
 <h2 id="结尾"><a class="markdownIt-Anchor" href="#结尾"></a> 结尾</h2>
 <p>是遇到了一堆问题，但是好像最后绕开了好多……</p>
