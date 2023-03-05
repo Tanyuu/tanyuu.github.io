@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>浅探C++中const、char与*的排列组合</title>
+    <link href="/2023.01-06/%E6%B5%85%E6%8E%A2C++%E4%B8%ADconst%E3%80%81char%E4%B8%8EAsterisk%E7%9A%84%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88/"/>
+    <url>/2023.01-06/%E6%B5%85%E6%8E%A2C++%E4%B8%ADconst%E3%80%81char%E4%B8%8EAsterisk%E7%9A%84%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88/</url>
+    
+    <content type="html"><![CDATA[<h2 id="写在前面"><a class="markdownIt-Anchor" href="#写在前面"></a> 写在前面</h2><p>来自于C++课上提出的问题：<code>char *p</code>、<code>const char *p</code>、<code>char p[]</code>、<code>const char p[]</code>有何区别。本文通过测试编译器是否报错和使用<code>typeid(VAIBLE_NAME).name()</code>输出的方式来从<code>能否更改指向的地址</code> 和<code>能否更改指向的内容</code>两个角度来测试</p><blockquote><p>char *p1<br />const char *p2<br />char *const p3<br />char const *p4<br />char p5[]<br />const char p6[]</p></blockquote><p>六者的区别。</p><h2 id="写在中间"><a class="markdownIt-Anchor" href="#写在中间"></a> 写在中间</h2><p>需要注意的是，在一些相对基础（内容浅显、易于理解）的课中，可能会将数组类型（[]）和指针类型（*）混为一谈，实际上这是错误的。在底层他们的受处理方法完全不同。</p><p>对于数组类型，无论定义时是否指定长度或是否初始化（指定长度和初始化至少做一个），数组都不可以<code>更改指向的地址</code>。如果数组中的数据类型不是<code>const</code>类型，则可以<code>更改指向的内容</code>。</p><table><thead><tr><th>数据类型</th><th>能否更改指向地址</th><th>能否更改指向内容</th><th>typeid(VAIBLE_NAME).name()</th><th>sizeof(VAIBLE_NAME)</th></tr></thead><tbody><tr><td>char *</td><td>可</td><td>可</td><td>Pc</td><td>8</td></tr><tr><td>const char *</td><td>可</td><td>否</td><td>PKc</td><td>8</td></tr><tr><td>char *const</td><td>否</td><td>可</td><td>Pc</td><td>8</td></tr><tr><td>char const *</td><td>可</td><td>否</td><td>PKc</td><td>8</td></tr><tr><td>char []</td><td>否</td><td>可</td><td>A3_c</td><td>3</td></tr><tr><td>const char []</td><td>否</td><td>否</td><td>A3_c</td><td>3</td></tr></tbody></table><p>关于<code>typeid(VAIBLE_NAME).name()</code>输出内容的含义，我们可以参照chatGPT给出的解释：</p><p><img src="https://s2.loli.net/2023/03/05/rECeMlW8khNAd5H.png" alt="为什么不问问万能的chatCPT呢" /></p><p>至于<code>sizeof(VAIBLE_NAME)</code>返回的内容我们可以视作该变量占用的字节数。</p><p>我们可以发现，连续的<code>char const</code>和<code>const char</code>是完全相同的，其均代表<code>更改指向的内容</code>这一操作不被允许。而类似<code>* const</code> 的结构代表<code>更改指向的地址</code>这一操作不被允许。</p><h2 id="写在后面"><a class="markdownIt-Anchor" href="#写在后面"></a> 写在后面</h2><p>本文使用的测试代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;typeinfo&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">char</span> c0 = <span class="hljs-string">&#x27;b&#x27;</span>;<br>    <span class="hljs-type">char</span> *p1 = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *p2 = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-type">char</span> *<span class="hljs-type">const</span> p3 = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-type">char</span> <span class="hljs-type">const</span> *p4 = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-type">char</span> p5[] = <span class="hljs-string">&quot;p5&quot;</span>;<br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span> p6[] = <span class="hljs-string">&quot;p6&quot;</span>;<br><br>    p1 = &amp;c0;<br>    p2 = &amp;c0;<br>    <span class="hljs-comment">// p3 = &amp;c0;</span><br>    p4 = &amp;c0;<br>    <span class="hljs-comment">// p5 = &amp;c0;</span><br>    <span class="hljs-comment">// p6 = &amp;c0;</span><br><br>    *p1 = <span class="hljs-string">&#x27;a&#x27;</span>;<br>    <span class="hljs-comment">// *p2 = &#x27;a&#x27;;</span><br>    *p3 = <span class="hljs-string">&#x27;a&#x27;</span>;<br>    <span class="hljs-comment">// *p4 = &#x27;a&#x27;;</span><br>    *p5 = <span class="hljs-string">&#x27;a&#x27;</span>;<br>    <span class="hljs-comment">// *p6 = &#x27;a&#x27;;</span><br><br>    cout &lt;&lt; <span class="hljs-string">&quot;p1 &quot;</span> &lt;&lt; <span class="hljs-built_in">typeid</span>(p1).<span class="hljs-built_in">name</span>() &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span>(p1) &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;p2 &quot;</span> &lt;&lt; <span class="hljs-built_in">typeid</span>(p2).<span class="hljs-built_in">name</span>() &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span>(p2) &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;p3 &quot;</span> &lt;&lt; <span class="hljs-built_in">typeid</span>(p3).<span class="hljs-built_in">name</span>() &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span>(p3) &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;p4 &quot;</span> &lt;&lt; <span class="hljs-built_in">typeid</span>(p4).<span class="hljs-built_in">name</span>() &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span>(p4) &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;p5 &quot;</span> &lt;&lt; <span class="hljs-built_in">typeid</span>(p5).<span class="hljs-built_in">name</span>() &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span>(p5) &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;p6 &quot;</span> &lt;&lt; <span class="hljs-built_in">typeid</span>(p6).<span class="hljs-built_in">name</span>() &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span>(p6) &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;c0 &quot;</span> &lt;&lt; <span class="hljs-built_in">typeid</span>(c0).<span class="hljs-built_in">name</span>() &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span>(c0) &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure><p>被注释掉的内容即为不被允许的操作。</p><p>什么常量指针、指针常量，作者本不应该给读者设置门槛。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>C++</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>海尔X208双系统安装记录</title>
     <link href="/2023.01-06/%E6%B5%B7%E5%B0%94X208%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/"/>
     <url>/2023.01-06/%E6%B5%B7%E5%B0%94X208%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/</url>
@@ -316,9 +335,9 @@
       
       <category>算法竞赛</category>
       
-      <category>图与树</category>
-      
       <category>DP与贪心</category>
+      
+      <category>图与树</category>
       
     </categories>
     
@@ -505,9 +524,9 @@
       
       <category>算法竞赛</category>
       
-      <category>数据结构</category>
-      
       <category>DP与贪心</category>
+      
+      <category>数据结构</category>
       
     </categories>
     
@@ -1116,9 +1135,9 @@
       
       <category>算法竞赛</category>
       
-      <category>图与树</category>
-      
       <category>DP与贪心</category>
+      
+      <category>图与树</category>
       
     </categories>
     
@@ -1160,9 +1179,9 @@
       
       <category>算法竞赛</category>
       
-      <category>数据结构</category>
-      
       <category>DP与贪心</category>
+      
+      <category>数据结构</category>
       
     </categories>
     

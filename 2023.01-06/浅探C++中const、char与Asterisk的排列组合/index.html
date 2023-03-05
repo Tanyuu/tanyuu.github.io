@@ -16,24 +16,23 @@
   <meta name="author" content="F Juny">
   <meta name="keywords" content="">
   
-    <meta name="description" content="写在前面 在同学的提醒和一些潜在需求的驱动下，想找一台物理机装Linux来玩，担心搞砸（差点发生了）带来的严重后果，决定使用家里的闲置笔记本。 至于需求是否真的迫切或者必要，我现在还是没有判断的，但是至少在这个过程中接触到了一些更基础的内容。  软硬件基础情况 X208上市时间 2010年，处理器 Intel Atom CPU N450 1.66GHz，显卡 Intel® Grapics Med">
+    <meta name="description" content="写在前面 来自于C++课上提出的问题：char *p、const char *p、char p[]、const char p[]有何区别。本文通过测试编译器是否报错和使用typeid(VAIBLE_NAME).name()输出的方式来从能否更改指向的地址 和能否更改指向的内容两个角度来测试  char *p1 const char *p2 char *const p3 char const *p">
 <meta property="og:type" content="article">
-<meta property="og:title" content="海尔X208双系统安装记录">
-<meta property="og:url" content="https://tanyuu.github.io/2023.01-06/%E6%B5%B7%E5%B0%94X208%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:title" content="浅探C++中const、char与*的排列组合">
+<meta property="og:url" content="https://tanyuu.github.io/2023.01-06/%E6%B5%85%E6%8E%A2C++%E4%B8%ADconst%E3%80%81char%E4%B8%8EAsterisk%E7%9A%84%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88/index.html">
 <meta property="og:site_name" content="Yu_Tang">
-<meta property="og:description" content="写在前面 在同学的提醒和一些潜在需求的驱动下，想找一台物理机装Linux来玩，担心搞砸（差点发生了）带来的严重后果，决定使用家里的闲置笔记本。 至于需求是否真的迫切或者必要，我现在还是没有判断的，但是至少在这个过程中接触到了一些更基础的内容。  软硬件基础情况 X208上市时间 2010年，处理器 Intel Atom CPU N450 1.66GHz，显卡 Intel® Grapics Med">
+<meta property="og:description" content="写在前面 来自于C++课上提出的问题：char *p、const char *p、char p[]、const char p[]有何区别。本文通过测试编译器是否报错和使用typeid(VAIBLE_NAME).name()输出的方式来从能否更改指向的地址 和能否更改指向的内容两个角度来测试  char *p1 const char *p2 char *const p3 char const *p">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2023/02/03/ZmRXcdMjCLpsPrv.png">
-<meta property="og:image" content="https://s2.loli.net/2023/02/03/wY6NtoalLJqePQ3.jpg">
-<meta property="article:published_time" content="2023-02-03T09:00:54.000Z">
-<meta property="article:modified_time" content="2023-02-03T09:09:15.275Z">
+<meta property="og:image" content="https://s2.loli.net/2023/03/05/rECeMlW8khNAd5H.png">
+<meta property="article:published_time" content="2023-03-05T09:42:35.000Z">
+<meta property="article:modified_time" content="2023-03-05T09:44:47.368Z">
 <meta property="article:author" content="Fu Junyuan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s2.loli.net/2023/02/03/ZmRXcdMjCLpsPrv.png">
+<meta name="twitter:image" content="https://s2.loli.net/2023/03/05/rECeMlW8khNAd5H.png">
   
   
   
-  <title>海尔X208双系统安装记录 - Yu_Tang</title>
+  <title>浅探C++中const、char与*的排列组合 - Yu_Tang</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="海尔X208双系统安装记录"></span>
+            <span id="subtitle" data-typed-text="浅探C++中const、char与*的排列组合"></span>
           
         </div>
 
@@ -210,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-03 17:00" pubdate>
-          2023年2月3日 下午
+        <time datetime="2023-03-05 17:42" pubdate>
+          2023年3月5日 下午
         </time>
       </span>
     
@@ -222,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          2k 字
         
       </span>
     
@@ -233,7 +232,7 @@
         
         
         
-          10 分钟
+          17 分钟
         
       </span>
     
@@ -271,62 +270,89 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">海尔X208双系统安装记录</h1>
+            <h1 style="display: none">浅探C++中const、char与*的排列组合</h1>
             
             
               <div class="markdown-body">
                 
                 <h2 id="写在前面"><a class="markdownIt-Anchor" href="#写在前面"></a> 写在前面</h2>
-<p>在同学的提醒和一些潜在需求的驱动下，想找一台物理机装Linux来玩，担心搞砸（差点发生了）带来的严重后果，决定使用家里的闲置笔记本。</p>
-<p>至于需求是否真的迫切或者必要，我现在还是没有判断的，但是至少在这个过程中接触到了一些更基础的内容。</p>
-<h2 id="软硬件基础情况"><a class="markdownIt-Anchor" href="#软硬件基础情况"></a> 软硬件基础情况</h2>
-<p>X208上市时间 2010年，处理器 Intel Atom CPU N450 1.66GHz，显卡 Intel® Grapics Media Accelerator 3150，内存 Samsung DDR2 1GB 某型，硬盘 希捷Momentus 5400.6 250G(ST9250315AS)，有线网卡 Atheros AR8132 PCI-E， 无线网卡 Intel® WiFi Link 1000 BGN。</p>
+<p>来自于C++课上提出的问题：<code>char *p</code>、<code>const char *p</code>、<code>char p[]</code>、<code>const char p[]</code>有何区别。本文通过测试编译器是否报错和使用<code>typeid(VAIBLE_NAME).name()</code>输出的方式来从<code>能否更改指向的地址</code> 和<code>能否更改指向的内容</code>两个角度来测试</p>
 <blockquote>
-<p>这个无线网卡只支持到Wifi 5</p>
+<p>char *p1<br />
+const char *p2<br />
+char *const p3<br />
+char const *p4<br />
+char p5[]<br />
+const char p6[]</p>
 </blockquote>
-<p>BIOS版本 InsydeH20 Rev. 3.5，原操作系统 Windows XP Professional 版本2002 Service Pack 3。</p>
-<p>新操作系统为 Ubuntu 20.04 Server。</p>
-<h2 id="流程概述"><a class="markdownIt-Anchor" href="#流程概述"></a> 流程概述</h2>
-<p>可以参照<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1554y1n7zv">此教程</a></p>
-<ol>
-<li>
-<p>原系统备份</p>
-</li>
-<li>
-<p>使用XP的磁盘管理工具进行分区</p>
-<p>这里理论来说Linux的安装程序也可以通过LVM来实现这一步骤，但是遇到了若干问题，最后绕开了。</p>
-</li>
-<li>
-<p>制作引导盘</p>
-</li>
-<li>
-<p>更改BIOS引导设置</p>
-</li>
-<li>
-<p>安装</p>
-</li>
-</ol>
-<h2 id="problems"><a class="markdownIt-Anchor" href="#problems"></a> Problems</h2>
-<h3 id="1-windows不识别移动硬盘磁盘管理显示其为gpt保护分区"><a class="markdownIt-Anchor" href="#1-windows不识别移动硬盘磁盘管理显示其为gpt保护分区"></a> 1. Windows不识别移动硬盘，磁盘管理显示其为“GPT保护分区”</h3>
-<p><img src="https://s2.loli.net/2023/02/03/ZmRXcdMjCLpsPrv.png" srcset="/img/loading.gif" lazyload alt="32位XP不支持" /></p>
-<p>一般来说可以将磁盘格式化成MBR分区，但是移动硬盘上的数据不太方便备份，最终换了个U盘来做原系统的数据备份。</p>
-<p>至于MBR与GPT相互转换的方法，可以参照<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33770878/article/details/86354297">这里</a>，<strong>注意此方法会擦除磁盘数据</strong>（在找资料时已经见到太多惨剧了）。</p>
-<h3 id="2-grub报错grub-error-cant-find-command-grub_platform"><a class="markdownIt-Anchor" href="#2-grub报错grub-error-cant-find-command-grub_platform"></a> 2. GRUB报错：Grub error: Can’t find command ‘grub_platform’</h3>
-<p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/1288476/can-not-install-from-usb-with-error-cannot-find-grub-platform">来源</a></p>
-<p>此版本GRUB不适配GPT引导盘。可以通过<a target="_blank" rel="noopener" href="https://rufus.ie/zh/#google_vignette">Rufus</a>制作指定格式的引导盘。</p>
-<h3 id="3-关于桌面版安装程序的问题"><a class="markdownIt-Anchor" href="#3-关于桌面版安装程序的问题"></a> 3. 关于桌面版安装程序的问题</h3>
-<p>最开始尝试的是Ubuntu22.04桌面版，进入试用版桌面后及其卡顿几乎无法进行任何操作（包括打开终端），可能是由于gnome的负担过大。</p>
-<p>遂尝试了Ubuntu18.04桌面版，由于显示器过小安装程序窗口无法完全显示（应该是可以解决的）和同学的建议（18.04好多bug）而放弃。</p>
-<p>接下来计划先安装某服务器版，再安装较轻量级的桌面。</p>
-<img src="https://s2.loli.net/2023/02/03/wY6NtoalLJqePQ3.jpg" srcset="/img/loading.gif" lazyload alt="快说谢谢万叶" style="zoom:50%;" />
-<h3 id="4-安装失败报错pv_min_size-is-too-small"><a class="markdownIt-Anchor" href="#4-安装失败报错pv_min_size-is-too-small"></a> 4. 安装失败报错“pv_min_size is too small”</h3>
-<p><a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/255886/unable-to-run-the-pvcreate-command">来源1</a>，<a target="_blank" rel="noopener" href="https://www.linuxquestions.org/questions/linux-software-2/issue-with-partitions-lvm-895597/">来源2</a></p>
-<p>推测是硬盘分配单元大小过小，应该设置至少为2048KB。使用XP的硬盘管理重新格式化解决。</p>
-<h3 id="5-安装失败报错expecting-swap-found-none"><a class="markdownIt-Anchor" href="#5-安装失败报错expecting-swap-found-none"></a> 5. 安装失败报错“expecting swap, found none”</h3>
-<p><a target="_blank" rel="noopener" href="https://www.mail-archive.com/ubuntu-bugs@lists.ubuntu.com/msg5847941.html">来源1</a>，<a target="_blank" rel="noopener" href="https://bugs.launchpad.net/subiquity/+bug/1878890">来源2</a>，<a target="_blank" rel="noopener" href="https://bugs.launchpad.net/ubuntu/+source/subiquity/+bug/1952545">来源3</a></p>
-<p>报错发生在 <code>configuring partition:partition-xxxx</code> 处理分配给swap的空间时。参照来源2的解决方法进行了edge更新，但是依然存在问题。最后选择了先不分配swap空间。</p>
-<h2 id="结尾"><a class="markdownIt-Anchor" href="#结尾"></a> 结尾</h2>
-<p>是遇到了一堆问题，但是好像最后绕开了好多……</p>
+<p>六者的区别。</p>
+<h2 id="写在中间"><a class="markdownIt-Anchor" href="#写在中间"></a> 写在中间</h2>
+<p>需要注意的是，在一些相对基础（内容浅显、易于理解）的课中，可能会将数组类型（[]）和指针类型（*）混为一谈，实际上这是错误的。在底层他们的受处理方法完全不同。</p>
+<p>对于数组类型，无论定义时是否指定长度或是否初始化（指定长度和初始化至少做一个），数组都不可以<code>更改指向的地址</code>。如果数组中的数据类型不是<code>const</code>类型，则可以<code>更改指向的内容</code>。</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>能否更改指向地址</th>
+<th>能否更改指向内容</th>
+<th>typeid(VAIBLE_NAME).name()</th>
+<th>sizeof(VAIBLE_NAME)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>char *</td>
+<td>可</td>
+<td>可</td>
+<td>Pc</td>
+<td>8</td>
+</tr>
+<tr>
+<td>const char *</td>
+<td>可</td>
+<td>否</td>
+<td>PKc</td>
+<td>8</td>
+</tr>
+<tr>
+<td>char *const</td>
+<td>否</td>
+<td>可</td>
+<td>Pc</td>
+<td>8</td>
+</tr>
+<tr>
+<td>char const *</td>
+<td>可</td>
+<td>否</td>
+<td>PKc</td>
+<td>8</td>
+</tr>
+<tr>
+<td>char []</td>
+<td>否</td>
+<td>可</td>
+<td>A3_c</td>
+<td>3</td>
+</tr>
+<tr>
+<td>const char []</td>
+<td>否</td>
+<td>否</td>
+<td>A3_c</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>关于<code>typeid(VAIBLE_NAME).name()</code>输出内容的含义，我们可以参照chatGPT给出的解释：</p>
+<p><img src="https://s2.loli.net/2023/03/05/rECeMlW8khNAd5H.png" srcset="/img/loading.gif" lazyload alt="为什么不问问万能的chatCPT呢" /></p>
+<p>至于<code>sizeof(VAIBLE_NAME)</code>返回的内容我们可以视作该变量占用的字节数。</p>
+<p>我们可以发现，连续的<code>char const</code>和<code>const char</code>是完全相同的，其均代表<code>更改指向的内容</code>这一操作不被允许。而类似<code>* const</code> 的结构代表<code>更改指向的地址</code>这一操作不被允许。</p>
+<h2 id="写在后面"><a class="markdownIt-Anchor" href="#写在后面"></a> 写在后面</h2>
+<p>本文使用的测试代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;typeinfo&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">char</span> c0 = <span class="hljs-string">&#x27;b&#x27;</span>;<br>    <span class="hljs-type">char</span> *p1 = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span> *p2 = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-type">char</span> *<span class="hljs-type">const</span> p3 = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-type">char</span> <span class="hljs-type">const</span> *p4 = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-type">char</span> p5[] = <span class="hljs-string">&quot;p5&quot;</span>;<br>    <span class="hljs-type">const</span> <span class="hljs-type">char</span> p6[] = <span class="hljs-string">&quot;p6&quot;</span>;<br><br>    p1 = &amp;c0;<br>    p2 = &amp;c0;<br>    <span class="hljs-comment">// p3 = &amp;c0;</span><br>    p4 = &amp;c0;<br>    <span class="hljs-comment">// p5 = &amp;c0;</span><br>    <span class="hljs-comment">// p6 = &amp;c0;</span><br><br>    *p1 = <span class="hljs-string">&#x27;a&#x27;</span>;<br>    <span class="hljs-comment">// *p2 = &#x27;a&#x27;;</span><br>    *p3 = <span class="hljs-string">&#x27;a&#x27;</span>;<br>    <span class="hljs-comment">// *p4 = &#x27;a&#x27;;</span><br>    *p5 = <span class="hljs-string">&#x27;a&#x27;</span>;<br>    <span class="hljs-comment">// *p6 = &#x27;a&#x27;;</span><br><br>    cout &lt;&lt; <span class="hljs-string">&quot;p1 &quot;</span> &lt;&lt; <span class="hljs-built_in">typeid</span>(p1).<span class="hljs-built_in">name</span>() &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span>(p1) &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;p2 &quot;</span> &lt;&lt; <span class="hljs-built_in">typeid</span>(p2).<span class="hljs-built_in">name</span>() &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span>(p2) &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;p3 &quot;</span> &lt;&lt; <span class="hljs-built_in">typeid</span>(p3).<span class="hljs-built_in">name</span>() &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span>(p3) &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;p4 &quot;</span> &lt;&lt; <span class="hljs-built_in">typeid</span>(p4).<span class="hljs-built_in">name</span>() &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span>(p4) &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;p5 &quot;</span> &lt;&lt; <span class="hljs-built_in">typeid</span>(p5).<span class="hljs-built_in">name</span>() &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span>(p5) &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;p6 &quot;</span> &lt;&lt; <span class="hljs-built_in">typeid</span>(p6).<span class="hljs-built_in">name</span>() &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span>(p6) &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;c0 &quot;</span> &lt;&lt; <span class="hljs-built_in">typeid</span>(c0).<span class="hljs-built_in">name</span>() &lt;&lt; <span class="hljs-string">&#x27; &#x27;</span> &lt;&lt; <span class="hljs-built_in">sizeof</span>(c0) &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>被注释掉的内容即为不被允许的操作。</p>
+<p>什么常量指针、指针常量，作者本不应该给读者设置门槛。</p>
 
                 
               </div>
@@ -345,7 +371,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  <a href="/categories/C/" class="category-chain-item">C++</a>
   
   
 
@@ -365,8 +391,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>海尔X208双系统安装记录</div>
-      <div>https://tanyuu.github.io/2023.01-06/海尔X208双系统安装记录/</div>
+      <div>浅探C++中const、char与*的排列组合</div>
+      <div>https://tanyuu.github.io/2023.01-06/浅探C++中const、char与Asterisk的排列组合/</div>
     </div>
     <div class="license-meta">
       
@@ -378,7 +404,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月3日</div>
+          <div>2023年3月5日</div>
         </div>
       
       
@@ -408,18 +434,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023.01-06/%E6%B5%85%E6%8E%A2C++%E4%B8%ADconst%E3%80%81char%E4%B8%8EAsterisk%E7%9A%84%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88/" title="浅探C++中const、char与*的排列组合">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">浅探C++中const、char与*的排列组合</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022.07-12/2022%E7%89%9B%E5%AE%A2%E6%9A%91%E6%9C%9F%E5%A4%9A%E6%A0%A1%E8%AE%AD%E7%BB%83%E8%90%A510%EF%BC%88FHI%EF%BC%89/" title="2022牛客暑期多校训练营10（FHI）">
-                        <span class="hidden-mobile">2022牛客暑期多校训练营10（FHI）</span>
+                      <a href="/2023.01-06/%E6%B5%B7%E5%B0%94X208%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/" title="海尔X208双系统安装记录">
+                        <span class="hidden-mobile">海尔X208双系统安装记录</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
